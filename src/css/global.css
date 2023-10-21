@@ -326,3 +326,43 @@
   height: 35px;
 }
 /* end product page section */
+
+/* filter */
+
+.fliter-check {
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.btn-check:checked + .fliter-check {
+  color: #224F34;
+  transition: 0.3s;
+}
+.btn-check:checked + .fliter-check .check-shape {
+  background-color: #224F34;
+  transition: 0.3s;
+}
+.check-shape {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  border: #333 1px solid;
+}
+
+.price-input{
+  background-color: rgba(255, 255, 255, 0) !important;
+  border: 1px solid rgb(125, 125, 125);
+}
+.price-input:focus{
+  border-color: #224F34  !important;
+  box-shadow: none !important;
+}
+
+.price-input:focus + .btn-search .icon-search  {
+  color: #224F34 ;
+}
+.form-select {
+  width: 200px;
+}
+/* filter */
