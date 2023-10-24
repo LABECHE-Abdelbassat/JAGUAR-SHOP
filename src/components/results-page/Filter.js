@@ -5,21 +5,37 @@ const Filter = () => {
   return (
     <div>
         <div className='my-2 align-items-center'>
-        <div className='text-main m-0 p-2 fs-5'>FILTER</div>
+        <div className='text-main m-0 py-2 fs-5'>FILTER</div>
         <div className='flex-fill line'></div>
       </div>
       <div class="gap-2 mt-3" role="group" aria-label="Basic checkbox toggle button group">
-    <input type="checkbox" className="btn-check" name="btncheckbox3" id="btncheckbox1" autocomplete="off" ></input>
-    <label class=" d-flex align-items-center gap-2 fs-5 fw-meduim mt-1 fliter-check" htmlFor="btncheckbox1">
-        <div className='check-shape'></div>
-        first cat</label>
+      <Form.Check // prettier-ignore
+            type={'checkbox'}
+            id={`default-checkbox`}
+            label={`default checkbox`}
+            
+          />
+          <Form.Check // prettier-ignore
+            type={'checkbox'}
+            id={`default-checkbox1`}
+            label={`default checkbox`}
+            
+          />
     </div>
       <div class="gap-2 mt-2" role="group" aria-label="Basic checkbox toggle button group">
       <div className='flex-fill line'></div>
-    <input type="checkbox" className="btn-check" name="btncheckbox3" id="btncheckbox1" autocomplete="off" ></input>
-    <label class=" d-flex align-items-center gap-2 fs-5 fw-meduim mt-1 fliter-check" htmlFor="btncheckbox1">
-        <div className='check-shape'></div>
-        first cat</label>
+      <Form.Check // prettier-ignore
+            type={'checkbox'}
+            id={`default-checkbox`}
+            label={`default checkbox`}
+            className='mt-2'
+          />
+          <Form.Check // prettier-ignore
+            type={'checkbox'}
+            id={`default-checkbox`}
+            label={`default checkbox`}
+            
+          />
     </div>
       <div class="gap-2 mt-2" role="group" aria-label="Basic checkbox toggle button group">
       <div className='flex-fill line'></div>

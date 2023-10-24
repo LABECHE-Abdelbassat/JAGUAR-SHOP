@@ -7,7 +7,7 @@ const ProductResultLine = ({data}) => {
     <div>
         <div className='my-2 align-items-center'>
         <div className='d-flex justify-content-between align-items-center'>
-        <div className='text-main m-0 p-2 fs-5'>WE FOUNT 48 RESULT</div>
+        <div className='text-main m-0 py-2 fs-5'>WE FOUNT 48 RESULT</div>
 
                 <Form.Select className='mb-2' aria-label="Default select example">
             <option>Open this select menu</option>

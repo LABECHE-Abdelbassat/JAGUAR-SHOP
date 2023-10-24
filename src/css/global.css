@@ -319,11 +319,12 @@
   outline:2px solid gray;
 }
 .btn-quantity {
-  width: 35px;
+  height: 32px;
+  width: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 35px;
+  text-align: center;
 }
 /* end product page section */
 
@@ -362,7 +363,56 @@
 .price-input:focus + .btn-search .icon-search  {
   color: #224F34 ;
 }
+.form-check-input {
+  border-color: #224F34;
+}
+.form-check-input:checked {
+  background-color: #224F34 !important;
+  border-color: #224F34 ;
+}
 .form-select {
   width: 200px;
 }
 /* filter */
+
+/* shoping cart */
+.card-img-cart-item {
+  min-height: 250px;
+  object-fit: cover;
+  width: 190px;
+}
+.cart-info {
+  flex-shrink: 3;
+}
+.coupon-input:focus {
+  box-shadow: none;
+  border-color: #224F34;
+}
+.coupon-input:focus + Button {
+  border-color: #224F34;
+}
+.coupon-input + Button:hover {
+  background-color: #224F34;
+}
+.cart-info .size label {
+  font-size: 13px;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+  
+}
+.cart-item {
+  min-width: 500px;
+}
+.cart-flow {
+  overflow: auto;
+}
+/* shoping cart */
+
+/* manage */
+.sidebar-item {
+  background-color: rgb(233, 233, 233);
+}
