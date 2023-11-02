@@ -20,7 +20,6 @@ const Home = () => {
         <Banner/>
         <ProductLine data={datatwo}/>
         <Brands/>
-        <Footer/>
     </Container>
   )
 }

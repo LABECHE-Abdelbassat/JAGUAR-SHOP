@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import SideBarUser from '../components/all/SideBarUser'
-import ManageAdresses from '../components/user/ManageAdresses'
+import SideBarUser from '../../components/all/SideBarUser'
+import Profile from '../../components/user/Profile'
 
-const ManageProfile = () => {
+const ProfilePage = () => {
   return (
     <Container>
         
@@ -12,12 +12,11 @@ const ManageProfile = () => {
             <SideBarUser/>
         </div>
         <div className='col-9'>
-            
-            {/* <ManageAdresses/> */}
+            <Profile/>
         </div>
       </div>
     </Container>
   )
 }
 
-export default ManageProfile
+export default ProfilePage

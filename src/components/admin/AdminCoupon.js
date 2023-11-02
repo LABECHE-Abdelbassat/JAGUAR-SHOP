@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button,Col, Card, Form } from 'react-bootstrap'
+import { Button,Col, Card, Form, CloseButton } from 'react-bootstrap'
 
-const CouponPage = () => {
+const AdminCoupon = () => {
   return (
     <div>
         <h2 className='color-main fw-semibold'>Add New Coupon</h2>
@@ -28,17 +28,26 @@ const CouponPage = () => {
             <h2 className='mt-3 color-main fw-semibold'>All Coupons</h2>
 
             <Card className='mt-3'>
-                <Card.Body><strong>Name : </strong>Labeche Abdelbassat</Card.Body>
+                <Card.Body className='d-flex justify-content-between'>
+                    <div><strong>Name : </strong>Labeche Abdelbassat</div>
+                    <CloseButton/>
+                </Card.Body>
                 <Card.Body><strong>Phone : </strong>0672801669</Card.Body>
                 <Card.Body><strong>Number : </strong>a.labeche@gmail.com</Card.Body>
             </Card>
             <Card className='mt-3'>
-                <Card.Body><strong>Name : </strong>Labeche Abdelbassat</Card.Body>
+                <Card.Body className='d-flex justify-content-between'>
+                    <div><strong>Name : </strong>Labeche Abdelbassat</div>
+                    <CloseButton/>
+                </Card.Body>
                 <Card.Body><strong>Phone : </strong>0672801669</Card.Body>
                 <Card.Body><strong>Number : </strong>a.labeche@gmail.com</Card.Body>
             </Card>
             <Card className='mt-3'>
-                <Card.Body><strong>Name : </strong>Labeche Abdelbassat</Card.Body>
+                <Card.Body className='d-flex justify-content-between'>
+                    <div><strong>Name : </strong>Labeche Abdelbassat</div>
+                    <CloseButton/>
+                </Card.Body>
                 <Card.Body><strong>Phone : </strong>0672801669</Card.Body>
                 <Card.Body><strong>Number : </strong>a.labeche@gmail.com</Card.Body>
             </Card>
@@ -46,4 +55,4 @@ const CouponPage = () => {
   )
 }
 
-export default CouponPage
+export default AdminCoupon

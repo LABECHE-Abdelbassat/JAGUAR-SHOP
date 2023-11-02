@@ -1,23 +1,22 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import SideBarUser from '../components/all/SideBarUser'
-import ManageAdresses from '../components/user/ManageAdresses'
+import AdminCoupon from './../../components/admin/AdminCoupon';
+import SideBarAdmin from '../../components/admin/SideBarAdmin';
 
-const ManageProfile = () => {
+const AdminCouponPage = () => {
   return (
     <Container>
         
       <div className="row">
         <div className="col-3">
-            <SideBarUser/>
+            <SideBarAdmin/>
         </div>
         <div className='col-9'>
-            
-            {/* <ManageAdresses/> */}
+            <AdminCoupon/>
         </div>
       </div>
     </Container>
   )
 }
 
-export default ManageProfile
+export default AdminCouponPage

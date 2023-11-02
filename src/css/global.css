@@ -173,8 +173,8 @@
     border: 1px solid rgb(125, 125, 125);
     padding-right: 30px;
 }
-.search-input:focus{
-    border-color: #224F34  !important;
+*:focus {
+  border-color: #224F34  !important;
     box-shadow: none !important;
 }
 
@@ -415,4 +415,38 @@
 /* manage */
 .sidebar-item {
   background-color: rgb(233, 233, 233);
+}
+
+/* orders user */
+.card-img-cart-item-order{
+  height: 200px;
+  object-fit: cover;
+  width: 150px;
+}
+/* orders user */
+
+.eJEChV{
+  margin-right: 0 !important;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.fAouLC{
+  gap: 30px;
+  padding-bottom: 0 !important;
+  justify-content: center !important;
+}
+.add-brand div[role="button"] {
+
+  transform: scale(1.6);
+  transform-origin: 0 0;
+  margin-bottom: 20px;
+}
+.add-brand .lmMaya{
+  padding: 0;
+  margin: 0;
+  border: none;
+
 }

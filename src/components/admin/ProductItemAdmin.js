@@ -9,7 +9,7 @@ const ProductItemAdmin = ({img}) => {
       <div className='p-relative' style={{position:"relative" , overflow:"hidden"}}>
         <Card.Img className='card-img-item'  variant="top" src={img} />
         <button className='add-cart-btn'>Update Product</button>
-        <button className='add-wishlist-btn'><Icon className='icon-product' icon="iconamoon:heart" color='#666' width="25" height="25" /></button>
+        <button className='add-wishlist-btn'><Icon className='icon-product' icon="fluent:delete-12-filled"  color='#666' width="25" height="25" /></button>
       </div>
       <Card.Body>
         <Card.Title className='text-start product-desc text-success mt-3'>Card Title in here we put the descriptio of the product so in here we can do this of the end</Card.Title>
