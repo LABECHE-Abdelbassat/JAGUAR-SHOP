@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CategorieItem from './CategorieItem';
 import Container from 'react-bootstrap/esm/Container';
 
@@ -13,8 +13,17 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination } from 'swiper/modules';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCategories } from './../../redux/actions/categoryAction';
+import { Button } from 'react-bootstrap';
 
 const Categories = () => {
+  const categories = useSelector(state => state.CategoryReducer.allCategories.data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCategories("/api/v1/categories"))
+  }, [])
+
   return (
     <Container className='mt-4'>
       <Swiper 
@@ -42,21 +51,12 @@ const Categories = () => {
         modules={[Pagination]}
         className="mySwiper swiper-wrapper-cat"
       >
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
-        <SwiperSlide><CategorieItem/></SwiperSlide>
+        {categories.map(item=>{
+          return <SwiperSlide><CategorieItem data={item}/></SwiperSlide>
+        })}
+        
 
       </Swiper>
-
     </Container>
 
     

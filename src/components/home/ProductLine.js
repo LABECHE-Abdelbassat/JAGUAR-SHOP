@@ -1,8 +1,9 @@
 import React from 'react'
 import Container from 'react-bootstrap/esm/Container'
 import ProductItem from './../all/ProductItem';
+import PaginationComponent from '../all/Pagination';
 
-const ProductLine = ({data}) => {
+const ProductLine = ({limit , data}) => {
   return (
     <div>
       <div className='d-flex my-4 align-items-center'>
@@ -12,10 +13,13 @@ const ProductLine = ({data}) => {
       </div>
       <div className='row'>
         {
-          data.map((item) => {
+          data.data.map((item,index) => {
+            if(index>=limit){
+              return
+            }
             return (
               <div className='col-12 col-sm-6 col-md-4 col-lg-3 text-center mb-3 pb-4'>
-                <ProductItem img={"galery.jpg"}/>
+                <ProductItem data={item}/>
               </div>
             )
           })
@@ -23,6 +27,8 @@ const ProductLine = ({data}) => {
         
 
       </div>
+      {limit==4 ? "":<PaginationComponent paginationResult={data.paginationResult}/>}
+      
     </div>
   )
 }

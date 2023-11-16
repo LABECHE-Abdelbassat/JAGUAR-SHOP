@@ -1,12 +1,13 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
-const CategorieItem = () => {
+const CategorieItem = ({data}) => {
   return (
     <div>
       <div className='cat-img d-flex align-items-center justify-content-center bg-primary'>
-        <img src='galery.jpg' className='img-fluid'/>
+        <img src={data.image} className='img-fluid'/>
       </div>
-      <div className='text-center mt-2'>cat ndame</div>
+      <div className='text-center fs-5 fw-semibold mt-2'>{data.name}</div>
 
     </div>
   )

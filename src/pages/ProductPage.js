@@ -4,17 +4,25 @@ import ProductInfo from '../components/product-page/ProductInfo'
 import Container from 'react-bootstrap/esm/Container'
 import RatingSection from '../components/product-page/RatingSection'
 import ProductLine from '../components/home/ProductLine'
+import { getSpecificProduct } from '../redux/actions/productAction'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import ProductDetailedHook from './../hooks/productDetailedHook';
 
 const ProductPage = () => {
-  let datatwo = [1,1,1,1,1,1,1,1]
+  let datatwo = {data:[1,1,1,1,1,1,1,1]}
+  const params = useParams();
+ const product = ProductDetailedHook(params.id);
+  
   return (
     <Container>
         <div className='row'>
             <div className='col-12 col-md-5 col-lg-6 col-xl-5'>
-                <ProductImages/>
+                <ProductImages img={product.imageCover}/>
             </div>
             <div className='col-12 col-md-7 col-lg-6 col-xl-7 mt-3 mt-sm-0'>
-                <ProductInfo/>
+                <ProductInfo product={product}/>
             </div>
         </div>
         <RatingSection/>

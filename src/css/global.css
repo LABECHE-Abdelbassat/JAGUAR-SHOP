@@ -211,6 +211,9 @@
     overflow: hidden;
     border-radius: 50% !important;
 }
+.brand-img {
+  overflow: hidden;
+}
 /* end category sectio */
 /* start product section */
 .line {
@@ -237,7 +240,7 @@
     bottom: -40px;
     width: calc(100% - 20px);
     left: 10px;
-    background-color: rgba(255, 255, 255, 0.65);
+    background-color: rgba(237, 237, 237, 0.65);
     font-size: 14px;
     font-weight: 500;
     color: #333;
@@ -265,7 +268,7 @@
     position: absolute;
     top: 48px;
     right: -50px;
-    background-color: rgba(255, 255, 255, 0.65);
+    background-color: rgba(237, 237, 237, 0.65);
     width: 32px;
     display: flex;
     align-items: center;
@@ -290,8 +293,8 @@
 .product-desc {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* number of lines to show */
-            line-clamp: 2; 
+    -webkit-line-clamp: 1; /* number of lines to show */
+            line-clamp: 1; 
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }

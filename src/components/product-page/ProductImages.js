@@ -10,10 +10,10 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
+import { useEffect } from 'react';
 
 
-const ProductImages = () => {
-  
+const ProductImages = ({img}) => {
   return (
     <div className='image-swiper'>
       <Swiper
@@ -28,7 +28,7 @@ const ProductImages = () => {
         className="mySwiper2"
       >
         <SwiperSlide>
-          <img src="galery.jpg" />
+          <img src={img} />
         </SwiperSlide>
         <SwiperSlide >
           <img src="logo.png" className='fluid' style={{objectFit:"cover"}}/>

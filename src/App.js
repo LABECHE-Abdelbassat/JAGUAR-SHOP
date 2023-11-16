@@ -26,14 +26,20 @@ import SignUpPage from './pages/SignUpPage';
 import AdminAddSubCategoryPage from './pages/admin/AdminAddSubCategoryPage';
 import AdminProductPage from './pages/admin/AdminProductsPage';
 import ManageAdressesPage from './pages/user/ManageAdressesPage';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProducts } from './redux/actions/productAction';
+import { useEffect } from 'react';
 
 
 function App() {
   
+
+  
+
   return (
     <div className="">  
       <TheNav/>
-      <div style={{minHeight:"calc(100vh - 284px)"}}>
+      <div style={{minHeight:"calc(90vh - 284px)"}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CategorieItem from './CategorieItem';
 import Container from 'react-bootstrap/esm/Container';
 
@@ -14,8 +14,15 @@ import 'swiper/css/navigation';
 // import required modules
 import { Navigation } from 'swiper/modules';
 import BrandItem from './BrandItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllBrands } from './../../redux/actions/brandAction';
 
 const Brands = () => {
+  const brands = useSelector(state => state.BrandReducer.allBrands.data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBrands("/api/v1/brands"))
+  }, [])
   return (
     <Container className='mt-4'>
       <div className=' fs-2 text-center mb-3'>brands</div>
@@ -42,15 +49,11 @@ const Brands = () => {
         modules={[Navigation]}
         className="mySwiper mb-5"
       >
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
-        <SwiperSlide><BrandItem/></SwiperSlide>
+        {
+          brands.map(item =>{
+            return <SwiperSlide><BrandItem data={item}/></SwiperSlide>
+          })
+        }
 
 
       </Swiper>

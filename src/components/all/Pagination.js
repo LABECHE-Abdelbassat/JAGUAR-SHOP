@@ -1,18 +1,25 @@
 import React from 'react'
 import ReactPaginate from "react-paginate";
+import { useDispatch } from 'react-redux';
+import { getAllProducts } from '../../redux/actions/productAction';
 
-const Pagination = () => {
+const PaginationComponent = ({paginationResult}) => {
+    const dispatch = useDispatch();
+    const handlePageClick = (event) => { 
+        console.log(event.selected);
+        dispatch(getAllProducts(`/api/v1/products?page=${event.selected + 1}`))
 
-    const handlePageClick = () => { };
+
+    };
     return (
         <ReactPaginate
             breakLabel="..."
-            nextLabel="التالى"
+            nextLabel=">"
             onPageChange={handlePageClick}
             marginPagesDisplayed={2}
             pageRangeDisplayed={2}
-            pageCount={100}
-            previousLabel="السابق"
+            pageCount={paginationResult?.numberOfPages}
+            previousLabel="<"
             containerClassName={"pagination justify-content-center p-3"}
             pageClassName={"page-item"}
             pageLinkClassName={"page-link"}
@@ -27,4 +34,4 @@ const Pagination = () => {
     )
 }
 
-export default Pagination
+export default PaginationComponent
