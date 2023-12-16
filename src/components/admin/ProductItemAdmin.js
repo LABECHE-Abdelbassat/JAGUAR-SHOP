@@ -2,14 +2,33 @@ import React from 'react'
 import StartReview from '../all/StartReview'
 import { Card } from 'react-bootstrap'
 import { Icon } from '@iconify/react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteProduct, getAllProducts, getSpecificProduct } from '../../redux/actions/productAction'
 
-const ProductItemAdmin = ({img}) => {
+const ProductItemAdmin = ({product , page}) => {
+  const dispatch = useDispatch();
+  const error = useSelector(state=>state.ProductReducer.error)
+
+  const token = localStorage.getItem("token")
+  function hundleClickDelete() {
+    dispatch(deleteProduct(`/api/v1/products/${product._id}`,token))
+    dispatch(getAllProducts(`/api/v1/products?page=${page}`))
+  }
+  function hundleClicktoUpdate(){
+    dispatch(getSpecificProduct(`/api/v1/products/${product.id}`))
+  }
   return (
     <div className='product-item'>
       <div className='p-relative' style={{position:"relative" , overflow:"hidden"}}>
-        <Card.Img className='card-img-item'  variant="top" src={img} />
-        <button className='add-cart-btn'>Update Product</button>
-        <button className='add-wishlist-btn'><Icon className='icon-product' icon="fluent:delete-12-filled"  color='#666' width="25" height="25" /></button>
+        <Link style={{textDecoration:"none"}} to={`/admin/product/${product._id}`}>
+          <Card.Img className='card-img-item'  variant="top" src={product.imageCover} />
+        </Link>
+        <Link style={{textDecoration:"none"}} to={`/admin/update-product/${product._id}`}>
+          <button onClick={hundleClicktoUpdate} className='add-cart-btn'>Update Product</button>
+        </Link>
+          <button onClick={hundleClickDelete} className='delete-btn'><Icon className='icon-product' icon="fluent:delete-12-filled"  color='#666' width="25" height="25" /></button>
+
       </div>
       <Card.Body>
         <Card.Title className='text-start product-desc text-success mt-3'>Card Title in here we put the descriptio of the product so in here we can do this of the end</Card.Title>

@@ -29,6 +29,7 @@ import ManageAdressesPage from './pages/user/ManageAdressesPage';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from './redux/actions/productAction';
 import { useEffect } from 'react';
+import AdminUpdateProductPage from './pages/admin/AdminUpdateProductPage';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route path="/wishlist" element={<WhishListPage/>}/>
 
           <Route path="/admin/products" element={<AdminProductPage/>}/>
+          <Route path="/admin/update-product/:id" element={<AdminUpdateProductPage/>}/>
           <Route path="/admin/orders" element={<AdminManageOrdersPage/>}/>
           <Route path="/admin/orders/:id" element={<AdminOrderPage/>}/>
           <Route path="/admin/coupon" element={<AdminCouponPage/>}/>

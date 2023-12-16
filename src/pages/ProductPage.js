@@ -18,14 +18,14 @@ const ProductPage = () => {
   return (
     <Container>
         <div className='row'>
-            <div className='col-12 col-md-5 col-lg-6 col-xl-5'>
+            <div className='col-12 col-md-6 col-lg-5 col-xl-4'>
                 <ProductImages img={product.imageCover}/>
             </div>
-            <div className='col-12 col-md-7 col-lg-6 col-xl-7 mt-3 mt-sm-0'>
+            <div className='col-12 col-md-6 col-lg-7 col-xl-8 mt-3 mt-sm-0'>
                 <ProductInfo product={product}/>
             </div>
         </div>
-        <RatingSection/>
+        <RatingSection id={product._id}/>
         <ProductLine data={datatwo}/>
     </Container>
   )

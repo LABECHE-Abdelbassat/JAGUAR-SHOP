@@ -6,9 +6,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, setTrue } from '../../redux/actions/categoryAction';
 import galery from "../../images/galery.jpg"
 import { createBrand } from './../../redux/actions/brandAction';
+import { useCreateBrandMutation } from '../../reduxQuery/APIs/brandApi';
+import SuccessMessage from '../all/SuccessMessage';
+import ErrorMessage from '../all/ErrorMessage';
 
 const AdminAddBrand = () => {
-  const brand = useSelector(state => state.BrandReducer);
+  const [createBrand , {isLoading ,isError , data , isSuccess , error}] = useCreateBrandMutation();
 
   const brandName = useRef();
   
@@ -21,19 +24,17 @@ const AdminAddBrand = () => {
     }
   }
   const imageis = useRef()
-  const dispatch = useDispatch();
-  const token = localStorage.getItem("token")
     const [image, setImage] = useState(galery);
-      const hundleClickAdd = ()=>{
-        dispatch({type:"ERROR BRAND"})
+      const hundleClickAdd = async ()=>{
         const formData = new FormData();
         formData.append("name", brandName.current.value);
         formData.append("image",img)
-        dispatch(createBrand("/api/v1/brands",formData , token));
-
+        await createBrand(formData);
       }
   return (
-    <div className='add-brand'>
+    <div className='position-relative add-brand'>
+      {isSuccess ? <SuccessMessage message={"Brand Created Successfully"}/>:""}
+      {isError ? <ErrorMessage error={error}/> : ""}
       <h4 className='color-main'>Add Brand</h4>
       <label className='my-3' style={{cursor:"pointer"}} htmlFor='img'>
         <img src={image} width={130}/>
@@ -43,7 +44,7 @@ const AdminAddBrand = () => {
                 <Form.Control ref={brandName} type="text" placeholder="Brand name" />
             </Form.Group>
             <Button onClick={hundleClickAdd} variant='success' className='w-100 d-flex align-items-center gap-3 justify-content-center mt-3'>Add Brand
-            {brand.loading === true ? <Spinner/>:""}
+              {isLoading ? <Spinner size='sm' className='ms-3'></Spinner> : ""}
             </Button>
     </div>
     

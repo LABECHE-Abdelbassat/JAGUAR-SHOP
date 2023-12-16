@@ -97,7 +97,7 @@
   }
   @media (max-width:575px){
     .image-swiper .swiper-slide img {
-        height: 512px;
+        height: 500px !important;
       }
   }
   @media (min-width: 576px) { 
@@ -112,21 +112,18 @@
       }
    }
   
-  @media (min-width: 992px) { 
-    .image-swiper .swiper-slide img {
-        height: 638px;
-      }
-   }
+
   
   @media (min-width: 1200px) { 
+    
     .image-swiper .swiper-slide img {
-        height: 631px;
+        height: 530px;
       }
    }
   
   @media (min-width: 1400px) { 
     .image-swiper .swiper-slide img {
-        height: 786px;
+        height: 550px;
       }
    }
   
@@ -136,7 +133,18 @@
     margin-left: auto;
     margin-right: auto;
   }
-  
+    .mySwiper2{
+      height: 100% !important;
+    }
+    .image-swiper {
+      height: 100%;
+    }
+    .swiper-slide {
+      height: 100%;
+    }
+    .image-swiper .swiper-slide img {
+        height: 100%;
+      }
   .image-swiper .swiper-slide {
     background-size: cover;
     background-position: center;
@@ -249,11 +257,17 @@
     border-radius: 4px;
     transition: 0.3s;
 }
-.add-wishlist-btn {
+.add-cart-btn:hover {
+  background-color: hsla(144, 40%, 22%, 0.6);
+  color: #fff;
+}
+
+.add-wishlist-btn , .delete-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: rgba(255, 0, 0, 0.65);
+    background-color: rgba(237, 237, 237, 0.65);
+    color: #224F34 !important;
     width: 32px;
     height: 32px;
     border: none;
@@ -262,7 +276,25 @@
     justify-content: center;
     border-radius: 50%;
     opacity: 0.5;
-    transition: 0.3;
+    transition: 0.2s;
+}
+.product-item:hover .delete-btn {
+  opacity: 1;
+}
+.delete-btn:hover {
+  background-color: hwb(144 13% 69% / 1);
+}
+.delete-btn:hover .icon-product{
+  color: white !important;
+}
+.add-wishlist-btn:hover , .add-whishlist-btn-active{
+  background-color: rgba(255, 0, 0, 0.65);
+}
+.add-wishlist-btn:hover .icon-product {
+  color: white !important;
+}
+.add-whishlist-btn-active .icon-product {
+  color: white !important;
 }
 .quick-view-btn {
     position: absolute;
@@ -284,9 +316,7 @@
 .product-item:hover .add-wishlist-btn {
     opacity: 1;
 }
-.add-wishlist-btn .icon-product {
-    color: white !important;
-}
+
 .product-item:hover .quick-view-btn {
     right: 10px;
 }

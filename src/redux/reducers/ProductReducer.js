@@ -4,6 +4,7 @@ const initialState = {
   topProduct:{data:[]},
   specificProduct:{data:{}},
   succsess:"",
+  error:"",
   loading:true};
 
 export const productReducer =  (state = initialState, { type, payload }) => {
@@ -19,10 +20,10 @@ export const productReducer =  (state = initialState, { type, payload }) => {
       return {...state , specificProduct : {...payload} , loading : false}
   
   case "CREATE PRODUCT":
-      return {...state , succsess:"product is created successfully" , loading : false}
+      return {...state ,specificProduct : {...payload}, succsess:"product is created successfully" , loading : false}
   
   case "ERROR PRODUCT":
-      return {...state , loading : true}
+      return {...state ,error : {...payload}, loading : true}
   
   default:
     return state

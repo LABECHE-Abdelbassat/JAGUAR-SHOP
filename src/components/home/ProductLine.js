@@ -2,14 +2,25 @@ import React from 'react'
 import Container from 'react-bootstrap/esm/Container'
 import ProductItem from './../all/ProductItem';
 import PaginationComponent from '../all/Pagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllWishListProducts } from '../../redux/actions/wishlistAction';
 
 const ProductLine = ({limit , data}) => {
+  // const dispatch = useDispatch();
+  // const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   dispatch(getAllWishListProducts("/api/v1/wishlist",token))
+  // }, [])
+
+  
   return (
     <div>
       <div className='d-flex my-4 align-items-center'>
         <div className='text-main m-0 p-0 fs-5'>TOP SALLED PRODUCTS</div>
         <div className='flex-fill line mx-3'></div>
-        <button className='see-more-btn'>see more</button>
+        {limit==4 ? <button className='see-more-btn'>see more</button>:""}
+
       </div>
       <div className='row'>
         {

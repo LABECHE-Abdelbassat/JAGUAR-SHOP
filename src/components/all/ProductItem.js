@@ -4,16 +4,51 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import StartReview from './StartReview';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createWishListProduct, deleteWishListProduct, getAllWishListProducts } from './../../redux/actions/wishlistAction';
+import { useEffect } from 'react';
 
-const ProductItem = ({data}) => {
+const ProductItem = ({isClicked,data}) => {
+  
+  // const [isClick, setisClick] = useState(isClicked)
+  // const token = localStorage.getItem("token")
+  // const wishlist = useSelector(state => state.WishlistReducer.wishList.data);
+
+  // useEffect(() => {
+  //   wishlist.map(item => {
+  //     if(item._id === data._id){
+  //       setisClick(true)
+  //     }
+  //   })
+  // })
+
+ 
+  
+  // const dispatch = useDispatch();
+  //  async function hundleClickWishlist(event) {
+  //   if(!isClick){
+  //     await dispatch(createWishListProduct("/api/v1/wishlist",{productId:data._id}, token))
+  //     await dispatch(getAllWishListProducts("/api/v1/wishlist",token))
+  //     setisClick(!isClick)
+  //   }else{
+  //     await dispatch(deleteWishListProduct(`/api/v1/wishlist/${data._id}`,token))
+  //     await dispatch(getAllWishListProducts("/api/v1/wishlist",token))
+
+  //     setisClick(!isClick)
+  //   }
+  // }
   return (
-    <Link style={{textDecoration:"none"}} to={`/products/${data._id}`}>
     <div className='product-item'>
       <div className='p-relative' style={{position:"relative" , overflow:"hidden"}}>
+        
+    <Link style={{textDecoration:"none"}} to={`/products/${data._id}`}>
         <Card.Img className='card-img-item'  variant="top" src={data.imageCover} />
+        </Link>
         <button className='add-cart-btn'>ADD TO CART</button>
-        <button className='add-wishlist-btn'><Icon className='icon-product' icon="iconamoon:heart" color='#666' width="25" height="25" /></button>
-        <button className='quick-view-btn'><Icon icon="iconamoon:eye" color="#666" width="22" height="22" /></button>
+        {/* {!isClick ? <button onClick={hundleClickWishlist} className='add-wishlist-btn'><Icon className='icon-product' icon="iconamoon:heart" color='#666' width="30" height="50" /></button>
+        : <button onClick={hundleClickWishlist} className='add-whishlist-btn-active add-wishlist-btn'><Icon className='icon-product' icon="iconamoon:heart" color='#666' width="30" height="50" /></button>} */}
+        <button  className='quick-view-btn'><Icon icon="iconamoon:eye" color="#666" width="22" height="22" /></button>
       </div>
       <Card.Body>
         <Card.Title className='text-start product-desc text-success mt-3'>{data.title}</Card.Title>
@@ -31,7 +66,6 @@ const ProductItem = ({data}) => {
         
       </Card.Body>
     </div>
-    </Link>
   )
 }
 

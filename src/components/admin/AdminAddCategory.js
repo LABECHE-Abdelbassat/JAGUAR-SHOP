@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, Spinner } from 'react-bootstrap';
-import AdminImageInput from './AdminImageInput';
 import { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createCategory, setTrue } from '../../redux/actions/categoryAction';
 import galery from "../../images/galery.jpg"
+import { useCreateCategoryMutation } from '../../reduxQuery/APIs/categoryApi';
+import ErrorMessage from '../all/ErrorMessage';
+import SuccessMessage from '../all/SuccessMessage';
 const AdminAddCategory = () => {
-  const category = useSelector(state => state.CategoryReducer);
+  const [createCategory , {isLoading ,isError , data , isSuccess , error}] = useCreateCategoryMutation();
+  
 
   const categoryName = useRef();
   
@@ -19,24 +20,19 @@ const AdminAddCategory = () => {
     }
   }
   const imageis = useRef()
-  const dispatch = useDispatch();
-  const token = localStorage.getItem("token")
     const [image, setImage] = useState(galery);
-    const crop = {
-        unit: '%',
-        aspect: 4 / 3,
-        width: '100'
-      };
-      const hundleClickAdd = ()=>{
-        dispatch({type:"ERROR CATEGORY"})
+      const hundleClickAdd =async ()=>{
         const formData = new FormData();
         formData.append("name", categoryName.current.value);
         formData.append("image",img)
-        dispatch(createCategory("/api/v1/categories",formData , token));
+        
+        await createCategory(formData)
 
       }
   return (
-    <div className='add-brand'>
+    <div className='add-brand position-relative'>
+      {isSuccess ? <SuccessMessage message={"Category Created Successfully"}/>:""}
+      {isError ? <ErrorMessage error={error}/> : ""}
       <h4 className='color-main'>Add Category</h4>
       <label className='my-3' style={{cursor:"pointer"}} htmlFor='img'>
         <img src={image} width={130}/>
@@ -46,7 +42,7 @@ const AdminAddCategory = () => {
                 <Form.Control ref={categoryName} type='text' placeholder="Category name" />
             </Form.Group>
     <Button onClick={hundleClickAdd} variant='success' className='w-100 d-flex align-items-center gap-3 justify-content-center mt-3'>Add Category
-    {category.loading === true ? <Spinner/>:""}
+    {isLoading ? <Spinner size='sm' className='ms-3'></Spinner> : ""}
     
     </Button>
     </div>
