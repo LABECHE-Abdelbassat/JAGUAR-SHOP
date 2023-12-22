@@ -1,26 +1,36 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { useGetAllOrdersQuery } from '../../reduxQuery/APIs/orderApi';
+import ErrorMessage from './../all/ErrorMessage';
+import { Spinner } from 'react-bootstrap';
 
 const AdminManageOrders = () => {
-  const ordersData = [1,1,1,1,1,1,1];
+  const {data , isLoading , isError , error}  = useGetAllOrdersQuery()
   return (
-    <div>
+    <div className='position-relative'>
+      <div style={{direction:"rtl"}}>
+          {isError ? <ErrorMessage error={error}/> : ""}
+      </div>
         <h2 className='color-main fw-semibold'>Manage All Orders</h2>
-        {ordersData.map(item => {
-          return <Link to={"/admin/orders/15"} style={{textDecoration:"none"}}>
+        {isLoading? <div className='text-center'><Spinner size='lg' variant='success' className='mt-4 align-self-center'></Spinner></div> :
+        <div>
+          {data?.data?.map((item , index) => {
+          return <Link key={index} to={`/admin/orders/${item._id}`} style={{textDecoration:"none"}}>
                   <Card className='mt-3'>
                       <Card.Body>
-                        <div className='mb-2'><strong>Order N: : </strong>150</div>
-                        <div><strong>From : </strong>Soltani Ilias , <strong>Soltaniilias@gmail.com</strong></div>
+                        <div className='mb-2'><strong>Order N: </strong>{index + 1}</div>
+                        <div><strong>From : </strong>{item?.user?.name} , <strong>{item?.user?.email}</strong></div>
                         <div className='d-flex justify-content-between'>
-                          <div><strong>Delivred : </strong>NO<strong> Payed : </strong> YES <strong>Payment Method : </strong> VISA CARD</div>
-                          <strong>200 USD</strong>
+                          <div><strong>Delivred : </strong>{item.isDelivered? 'Yes' : 'No'}<strong> Payed : </strong> {item.isPaid ? 'Yes' : 'No'} <strong>Payment Method : </strong>{item?.paymentMethodType}</div>
+                          <strong>{item.totalOrderPrice}</strong>
                         </div>
                       </Card.Body>
                   </Card>
                 </Link>
         })}
+        </div>}
+        
         
     </div>
   )

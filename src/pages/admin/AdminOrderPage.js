@@ -7,7 +7,7 @@ import AdminOrderItem from '../../components/admin/AdminOrderItem'
 
 const AdminOrderPage = () => {
   return (
-    <Container>
+    <Container className='position-relative'>
         
       <div className="row">
         <div className="col-3">

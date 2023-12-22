@@ -108,11 +108,12 @@ const AddProductHook = () => {
         } catch (error) {
           return console.log("you should enter an image")
         }
-        
+        formData.append('i','i')
         formData.append("category" , categoryId);
         formData.append("description" , description_input.current.value);
         formData.append("quantity" , quantity_input.current.value);
         formData.append("price" , price_input.current.value);
+        formData.append("sold",price_after_input.current.value)
         subCategoriesId.forEach(item => {
           formData.append("subcategories",item.value)
         })

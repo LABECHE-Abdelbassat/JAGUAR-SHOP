@@ -11,7 +11,7 @@ import ResultsPage from "./pages/ResultsPage";
 import CartPage from "./pages/CartPage";
 import SideBarUser from "./components/all/SideBarUser";
 import { Container } from "react-bootstrap";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, unstable_HistoryRouter, useLocation } from "react-router-dom";
 import ManageProfile from "./pages/ManageProfile";
 import WhishListPage from "./pages/WhishListPage";
 import Footer from "./components/all/Footer";
@@ -35,18 +35,17 @@ import AdminUpdateProductPage from './pages/admin/AdminUpdateProductPage';
 function App() {
   
 
-  
-
   return (
-    <div className="">  
-      <TheNav/>
+    <div className="app-style" >  
+      
       <div style={{minHeight:"calc(90vh - 284px)"}}>
       <BrowserRouter>
+      <TheNav/>
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/sign-up" element={<SignUpPage/>}/>
-          <Route path="/result-page" element={<ResultsPage/>}/>
+          <Route path="/result-page/:keyword?" element={<ResultsPage/>}/>
           <Route path="/products/:id" element={<ProductPage/>}/>
           <Route path="/cart" element={<CartPage/>}/>
           {/* paymentmethod */}

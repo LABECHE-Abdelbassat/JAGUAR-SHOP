@@ -5,21 +5,24 @@ import { Icon } from '@iconify/react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteProduct, getAllProducts, getSpecificProduct } from '../../redux/actions/productAction'
+import { useDeleteProductMutation } from '../../reduxQuery/APIs/productApi'
+import SuccessMessage from '../all/SuccessMessage'
+import ErrorMessage from '../all/ErrorMessage'
 
 const ProductItemAdmin = ({product , page}) => {
-  const dispatch = useDispatch();
-  const error = useSelector(state=>state.ProductReducer.error)
-
-  const token = localStorage.getItem("token")
+  const [deleteProduct , {isError , isSuccess , error ,isLoading}]= useDeleteProductMutation();
   function hundleClickDelete() {
-    dispatch(deleteProduct(`/api/v1/products/${product._id}`,token))
-    dispatch(getAllProducts(`/api/v1/products?page=${page}`))
+    deleteProduct(product._id);
+    // dispatch(deleteProduct(`/api/v1/products/${product._id}`,token))
+    // dispatch(getAllProducts(`/api/v1/products?page=${page}`))
   }
   function hundleClicktoUpdate(){
-    dispatch(getSpecificProduct(`/api/v1/products/${product.id}`))
+    // dispatch(getSpecificProduct(`/api/v1/products/${product.id}`))
   }
   return (
     <div className='product-item'>
+      {isSuccess ? <SuccessMessage message={"Product Deleted Successfully"}/>:""}
+      {isError ? <ErrorMessage error={error}/> : ""}
       <div className='p-relative' style={{position:"relative" , overflow:"hidden"}}>
         <Link style={{textDecoration:"none"}} to={`/admin/product/${product._id}`}>
           <Card.Img className='card-img-item'  variant="top" src={product.imageCover} />

@@ -10,22 +10,21 @@ export const loggedUserApi = createApi({
     tagTypes: ['LoggedUser'],
     endpoints: (builder) => ({
         getLoggedUser: builder.query({
-            query: (token) => ({
+            query: () => ({
                 url :`/users/getMe` ,
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
             providesTags : ["LoggedUser"]
         }),
         createLoggedUser: builder.mutation({
-                query: (loggedUser,token) => ({
+                query: (loggedUser) => ({
                     url: '/loggedUsers',
                     method: 'POST',
                     body:loggedUser,
                     headers: {
-                        'Content-Type': 'multipart/form-data',
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -35,35 +34,35 @@ export const loggedUserApi = createApi({
             },
         ),
         updateLoggedUser: builder.mutation({
-                query: (userData,token) => ({
+                query: (userData) => ({
                     url: `/users/updateMe`,
                     method: 'PUT',
                     body:userData,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['LoggedUser']
             },
         ),
         updateLoggedUserPassword: builder.mutation({
-                query: (pass,token) => ({
+                query: (pass) => ({
                     url: `/users/changeMyPassword`,
                     method: 'PUT',
                     body:pass,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['LoggedUser']
             },
         ),
         deleteLoggedUser: builder.mutation({
-                query: (token) => ({
+                query: () => ({
                     url: `/users/deleteMe`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['LoggedUser']

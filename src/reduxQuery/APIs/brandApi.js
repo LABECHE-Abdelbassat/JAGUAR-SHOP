@@ -39,12 +39,12 @@ export const brandApi = createApi({
             },
         ),
         updateBrand: builder.mutation({
-                query: (id,brand,token) => ({
+                query: ({id,brand}) => ({
                     url: `/brands/${id}`,
                     method: 'PUT',
                     body:brand,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -54,11 +54,11 @@ export const brandApi = createApi({
             },
         ),
         deleteBrand: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/brands/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: (result, error, id) => {

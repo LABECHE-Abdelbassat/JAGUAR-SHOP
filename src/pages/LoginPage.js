@@ -28,7 +28,7 @@ const LoginPage = () => {
     if(isSuccess){
       switch (data?.data?.role) {
         case "admin":
-            navigation("/admin/addcategory", { replace: true })
+            navigation("/admin/products", { replace: true })
           break;
         case "user":
             navigation("/", { replace: true })
@@ -47,7 +47,7 @@ const LoginPage = () => {
       {isError ? <ErrorMessage error={error}/> : ""}
 
       <h2 className='text-center text-black mb-3'>Welcome Back</h2>
-      <h5 className='text-center mb-4 text-gray'>welcome please login to your account</h5>
+      <h5 className='text-center mb-4 text-gray'>please login to your account</h5>
       <FloatingLabel
         controlId="floatingInput"
         label="Email address"

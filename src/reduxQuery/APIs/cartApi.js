@@ -10,67 +10,67 @@ export const cartApi = createApi({
     tagTypes: ['Cart'],
     endpoints: (builder) => ({
         getUserCart: builder.query({
-            query: (token) => ({
+            query: () => ({
                 url :'/cart',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
             providesTags: ['Cart']
         }),
         addProductToCart: builder.mutation({
-                query: (product,token) => ({
+                query: (product) => ({
                     url: '/cart',
                     method: 'POST',
                     body:product,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['Cart']
             },
         ),
         updateCartProductQuantity: builder.mutation({
-                query: (id,qte,token) => ({
-                    url: `/cart/${id}`,
+                query: (arg) => ({
+                    url: `/cart/${arg.id}`,
                     method: 'PUT',
-                    body:qte,
+                    body:arg.quantity,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['Cart']
             },
         ),
         applyCouponToCart: builder.mutation({
-                query: (coupon,token) => ({
+                query: (coupon) => ({
                     url: `/cart/applyCoupon`,
                     method: 'PUT',
                     body:coupon,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['Cart']
             },
         ),
         removeSpecificCartItem: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/cart/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['Cart']
             },
         ),
         clearUserCart: builder.mutation({
-                query: (token) => ({
+                query: () => ({
                     url: `/cart`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: ['Cart']

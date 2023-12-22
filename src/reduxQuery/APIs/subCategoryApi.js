@@ -49,7 +49,7 @@ export const subCategoryApi = createApi({
             },
         ),
         createSubCategoryOnCategory: builder.mutation({
-                query: (id,subCategory) => ({
+                query: ({id,subCategory}) => ({
                     url: `/categories/${id}/subcategories`,
                     method: 'POST',
                     body:subCategory,
@@ -64,7 +64,7 @@ export const subCategoryApi = createApi({
             },
         ),
         updateSubCategory: builder.mutation({
-                query: (id,subCategory) => ({
+                query: ({id,subCategory}) => ({
                     url: `/subcategories/${id}`,
                     method: 'PUT',
                     body:subCategory,

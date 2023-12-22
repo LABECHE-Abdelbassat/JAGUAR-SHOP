@@ -1,13 +1,9 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import { baseurl } from "../../api/baseURL";
+import { baseApi } from "./baseApi";
 
-export const reviewApi = createApi({
-    reducerPath: 'reviewApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: baseurl
-    }),
+export const reviewApi = baseApi.injectEndpoints({
     // keepUnusedDataFor: 120,
-    tagTypes: ['Review'],
     endpoints: (builder) => ({
         //CRUD
         getAllReviews: builder.query({
@@ -31,44 +27,60 @@ export const reviewApi = createApi({
                     : [{type: 'Review', id: 'LIST'}],
         }),
         getReview: builder.query({
-            query: (id) => `/reviews/${id}`
+            query: (id) => `/reviews/${id}`,
+            providesTags:[{type:"Review" , id:"LIST"}]
         }),
         createReview: builder.mutation({
-                query: (review,token) => ({
+                query: (review) => ({
                     url: '/reviews',
                     method: 'POST',
                     body:review,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
                     type: 'Review',
                     id: 'LIST'
                 }]
+            },
+        ),
+        createReviewOnProduct: builder.mutation({
+                query: (params) => ({
+                    url:`/products/${params.id}/reviews`,
+                    method: 'POST',
+                    body:params.review,
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }),
+                invalidatesTags: [{
+                    type: 'Review',
+                    id: 'LIST'
+                },{type:'Product' , id : 'ITEM'}]
             },
         ),
         updateReview: builder.mutation({
-                query: (id,review,token) => ({
-                    url: `/reviews/${id}`,
+                query: (params) => ({
+                    url: `/reviews/${params.id}`,
                     method: 'PUT',
-                    body:review,
+                    body:params.review,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
                     type: 'Review',
                     id: 'LIST'
-                }]
+                },{type:'Product' , id : 'ITEM'}]
             },
         ),
         deleteReview: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/reviews/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: (result, error, id) => {
@@ -79,4 +91,4 @@ export const reviewApi = createApi({
     })
 })
 // Dynamic hook
-export const {useGetAllReviewsQuery,useGetAllReviewsOnProductQuery, useGetReviewQuery, useCreateReviewMutation,useUpdateReviewMutation, useDeleteReviewMutation} = reviewApi
+export const {useGetAllReviewsQuery,useGetAllReviewsOnProductQuery, useGetReviewQuery, useCreateReviewMutation,useCreateReviewOnProductMutation,useUpdateReviewMutation, useDeleteReviewMutation} = reviewApi

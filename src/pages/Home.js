@@ -18,48 +18,31 @@ import { useGetAllCategoriesQuery } from '../reduxQuery/APIs/categoryApi'
 import { useGetAllSubCategoriesOnCategoryQuery, useGetAllSubCategoriesQuery } from '../reduxQuery/APIs/subCategoryApi'
 import { useGetAllProductsWishlistQuery } from '../reduxQuery/APIs/wishlistApi'
 import { useGetAllReviewsOnProductQuery, useGetAllReviewsQuery } from '../reduxQuery/APIs/reviewApi'
+import ErrorMessage from '../components/all/ErrorMessage'
 
 const Home = () => {
-  // const [loading, setloading] = useState(false)
-  // const topProducts = useSelector(state => state.ProductReducer.topProduct);
-  // const allProducts = useSelector(state=> state.ProductReducer.allProduct);
-  // const dispatch = useDispatch();
-  // async function dispatching() {
-  //   await dispatch(getAllProducts("/api/v1/products?page=1"))
-  //   await dispatch(getTopProducts("/api/v1/products"))
-  // }
-  // const userInfo= useSelector(state => state.AuthReducer.userInfo)
-  
-  // useEffect(() => {
-  //   setloading(true)
-  //   dispatching();
-  //   setloading(false)
-
-  //   if(userInfo.token.length > 5){
-  //     localStorage.setItem("token",userInfo.token)
-  //     console.log(localStorage.getItem("token"))
-  //     }
-  // }, [])
-  const {data , isLoading , isError , error} = useGetAllProductsQuery();
-  const brands = useGetAllBrandsQuery();
-  const categories = useGetAllCategoriesQuery();
-  const subcat = useGetAllSubCategoriesQuery();
-  const wishlist = useGetAllProductsWishlistQuery();
-  const review = useGetAllReviewsQuery();
-  console.log(review)
+  const [page, setpage] = useState(1)
+  const {data , isLoading , isError , error} = useGetAllProductsQuery(`?page=${page}`);
+  const {data:topData , isLoading : topLoading} = useGetAllProductsQuery('');
+  function modifyPage(page){
+    setpage(page)
+  }
   return (
-    <Container className='text-center'>
+    <Container className='text-center position-relative'>
+      <div style={{direction:"rtl"}}>
+            {isError ? <ErrorMessage error={error}/> : ""}
+        </div>
         <Slider/>
-        {/* <CategoriesModel/> */}
-        {/* {loading ? <Spinner className='fs-2'></Spinner>:
-        <ProductLine limit={4} data={topProducts}/>
-        } */}
-        {/* <Banner/> */}
-        {isLoading ? <Spinner className='fs-2'></Spinner>
-        :<ProductLine data={data}/>
+        <CategoriesModel/>
+        {topLoading ? <div className='text-center'><Spinner size='lg' variant='success' className='mt-4 align-self-center'></Spinner></div>:
+        <ProductLine limit={4} data={topData}/>
+        }
+        <Banner/>
+        {isLoading ? <div className='text-center'><Spinner size='lg' variant='success' className='mt-4 align-self-center'></Spinner></div>
+        :<ProductLine modifyPage={modifyPage} data={data}/>
         }
         
-        {/* <Brands/> */}
+        <Brands/>
     </Container>
   )
 }

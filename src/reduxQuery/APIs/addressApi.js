@@ -11,10 +11,10 @@ export const addressApi = createApi({
     endpoints: (builder) => ({
         //CRUD
         getAllUserAddresses: builder.query({
-            query: (token) => ({
+            query: () => ({
                 url:'/addresses',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
             providesTags: (result) =>
@@ -26,19 +26,19 @@ export const addressApi = createApi({
                     : [{type: 'Address', id: 'LIST'}],
         }),
         getAddress: builder.query({
-            query: (id,token) => ({url : `/addresses/${id}`,
+            query: (id) => ({url : `/addresses/${id}`,
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         })
         }),
         addAddress: builder.mutation({
-                query: (address,token) => ({
+                query: (address) => ({
                     url: '/addresses',
                     method: 'POST',
                     body:address,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -48,12 +48,12 @@ export const addressApi = createApi({
             },
         ),
         updateAddress: builder.mutation({
-                query: (id,address,token) => ({
-                    url: `/addresses/${id}`,
+                query: (args) => ({
+                    url: `/addresses/${args.id}`,
                     method: 'PUT',
-                    body:address,
+                    body:args.address,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -63,16 +63,17 @@ export const addressApi = createApi({
             },
         ),
         deleteAddress: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/addresses/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
-                invalidatesTags: (result, error, id) => {
-                    return [{type: 'Address', id}]
-                }
+                invalidatesTags: [{
+                    type: 'Address',
+                    id: 'LIST'
+                }]
             },
         )
     })

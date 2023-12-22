@@ -15,48 +15,52 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategories } from './../../redux/actions/categoryAction';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
+import { useGetAllCategoriesQuery } from '../../reduxQuery/APIs/categoryApi';
+import ErrorMessage from '../all/ErrorMessage';
 
 const Categories = () => {
-  const categories = useSelector(state => state.CategoryReducer.allCategories.data);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllCategories("/api/v1/categories"))
-  }, [])
+  const  {data , isLoading ,isError , error}= useGetAllCategoriesQuery();
+
 
   return (
     <Container className='mt-4'>
-      <Swiper 
-        pagination={{
-          clickable: true,
-        }}
-        breakpoints={{
-          100 : {
-            slidesPerView:2,
-            spaceBetween:20,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-          1024: {
-            slidesPerView: 6,
-            spaceBetween: 50,
-          },
-        }}
-        modules={[Pagination]}
-        className="mySwiper swiper-wrapper-cat"
-      >
-        {categories.map(item=>{
-          return <SwiperSlide><CategorieItem data={item}/></SwiperSlide>
-        })}
-        
+      <div style={{direction:"rtl"}}>
+            {isError ? <ErrorMessage error={error}/> : ""}
+        </div>
+      {isLoading ? <Spinner size='lg' variant='success' className='mt-4'></Spinner> 
+      :<Swiper 
+      pagination={{
+        clickable: true,
+      }}
+      breakpoints={{
+        100 : {
+          slidesPerView:2,
+          spaceBetween:20,
+        },
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 4,
+          spaceBetween: 40,
+        },
+        1024: {
+          slidesPerView: 6,
+          spaceBetween: 50,
+        },
+      }}
+      modules={[Pagination]}
+      className="mySwiper swiper-wrapper-cat"
+    >
+      {data?.data.map(item=>{
+        return <SwiperSlide><CategorieItem data={item}/></SwiperSlide>
+      })}
+      
 
-      </Swiper>
+    </Swiper>}
+      
     </Container>
 
     

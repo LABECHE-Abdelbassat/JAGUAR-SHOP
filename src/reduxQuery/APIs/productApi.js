@@ -1,17 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import { baseurl } from "../../api/baseURL";
+import { baseApi } from "./baseApi";
 
-export const productApi = createApi({
-    reducerPath: 'productApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: baseurl
-    }),
+export const productApi = baseApi.injectEndpoints({
     // keepUnusedDataFor: 120,
-    tagTypes: ['Product'],
     endpoints: (builder) => ({
         //CRUD
         getAllProducts: builder.query({
-            query: () => '/products',
+            query: (arg) => `/products${arg}`,
             providesTags: (result) =>
                 result
                     ? [
@@ -21,7 +17,8 @@ export const productApi = createApi({
                     : [{type: 'Product', id: 'LIST'}],
         }),
         getProduct: builder.query({
-            query: (id) => `/products/${id}`
+            query: (id) => `/products/${id}`,
+            providesTags: [{type: 'Product', id: 'ITEM'}],
         }),
         createProduct: builder.mutation({
                 query: (product) => ({
@@ -38,8 +35,9 @@ export const productApi = createApi({
                 }]
             },
         ),
+        
         updateProduct: builder.mutation({
-                query: (id,product) => ({
+                query: ({id,product}) => ({
                     url: `/products/${id}`,
                     method: 'PUT',
                     body:product,

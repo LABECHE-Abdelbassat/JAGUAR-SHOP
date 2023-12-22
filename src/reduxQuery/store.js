@@ -12,17 +12,19 @@ import { addressApi } from "./APIs/addressApi.js";
 import { couponApi } from "./APIs/couponApi.js";
 import { cartApi } from "./APIs/cartApi.js";
 import { orderApi } from "./APIs/orderApi.js";
+import { baseApi } from "./APIs/baseApi.js";
 
 export const store = configureStore({
     reducer: {
         [productApi.reducerPath]: productApi.reducer,
+        [reviewApi.reducerPath]: productApi.reducer,
+        
         [categoryApi.reducerPath]: categoryApi.reducer,
         [subCategoryApi.reducerPath]: subCategoryApi.reducer,
         [brandApi.reducerPath]: brandApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
         [loggedUserApi.reducerPath]: loggedUserApi.reducer,
-        [reviewApi.reducerPath]: reviewApi.reducer,
         [wishlistApi.reducerPath]: wishlistApi.reducer,
         [addressApi.reducerPath]: addressApi.reducer,
         [couponApi.reducerPath]: couponApi.reducer,
@@ -32,13 +34,13 @@ export const store = configureStore({
     // Cache, Polling , invalidate cache
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
         productApi.middleware,
+        reviewApi.middleware,
         categoryApi.middleware,
         subCategoryApi.middleware,
         brandApi.middleware,
         userApi.middleware,
         authApi.middleware,
         loggedUserApi.middleware,
-        reviewApi.middleware,
         wishlistApi.middleware,
         addressApi.middleware,
         couponApi.middleware,

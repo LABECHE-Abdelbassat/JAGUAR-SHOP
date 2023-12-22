@@ -10,10 +10,17 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Navigation } from 'swiper/modules';
-import { useEffect } from 'react';
 
 
-const ProductImages = ({img}) => {
+const ProductImages = ({ imgs}) => {
+
+  const imgst = [...imgs]
+  var lastElement = imgst.pop();
+
+  imgst.unshift(lastElement);
+  console.log("rerender")
+
+
   return (
     <div className='image-swiper'>
       <Swiper
@@ -27,36 +34,14 @@ const ProductImages = ({img}) => {
         modules={[ Navigation]}
         className="mySwiper2"
       >
-        <SwiperSlide>
-          <img src={img} />
+        
+        {imgst?.map((item , index)=>{
+          return <SwiperSlide key={index}>
+          <img src={item} />
         </SwiperSlide>
-        <SwiperSlide >
-          <img src="logo.png" className='fluid' style={{objectFit:"cover"}}/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-        </SwiperSlide>
+        })}
+        
+
       </Swiper>
     </div>
   )

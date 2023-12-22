@@ -11,27 +11,21 @@ export const wishlistApi = createApi({
     endpoints: (builder) => ({
         //CRUD
         getAllProductsWishlist: builder.query({
-            query: (token) => ({
-                url :'/wishlist',
+            query: () => ({
+                url :`/wishlist`,
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
-            providesTags: (result) =>
-                result
-                    ? [
-                        ...result.data.map(({id}) => ({type: 'Wishlist', id})),
-                        {type: 'Wishlist', id: 'LIST'}
-                    ]
-                    : [{type: 'Wishlist', id: 'LIST'}],
+            providesTags: [{type: 'Wishlist', id: 'LIST'}]
         }),
         addProductToWishlist: builder.mutation({
-                query: (product,token) => ({
+                query: (productId) => ({
                     url: '/wishlist',
                     method: 'POST',
-                    body:product,
+                    body:productId,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -42,15 +36,15 @@ export const wishlistApi = createApi({
         ),
 
         deleteProductFromWishlist: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/wishlist/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: (result, error, id) => {
-                    return [{type: 'Wishlist', id}]
+                    return [{type: 'Wishlist', id:"LIST"}]
                 }
             },
         )

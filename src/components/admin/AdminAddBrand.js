@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Spinner } from 'react-bootstrap';
 import AdminImageInput from './AdminImageInput';
 import { useRef } from 'react';
@@ -31,6 +31,13 @@ const AdminAddBrand = () => {
         formData.append("image",img)
         await createBrand(formData);
       }
+  useEffect(() => {
+    if(isSuccess){
+      brandName.current.value="";
+      setImage(galery)
+    }
+  }, [isSuccess])
+  
   return (
     <div className='position-relative add-brand'>
       {isSuccess ? <SuccessMessage message={"Brand Created Successfully"}/>:""}

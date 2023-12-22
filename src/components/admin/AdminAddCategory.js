@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Form, Spinner } from 'react-bootstrap';
 import { useRef } from 'react';
 import galery from "../../images/galery.jpg"
@@ -29,6 +29,13 @@ const AdminAddCategory = () => {
         await createCategory(formData)
 
       }
+
+      useEffect(() => {
+        if(isSuccess){
+          categoryName.current.value="";
+          setImage(galery)
+        }
+      }, [isSuccess])
   return (
     <div className='add-brand position-relative'>
       {isSuccess ? <SuccessMessage message={"Category Created Successfully"}/>:""}

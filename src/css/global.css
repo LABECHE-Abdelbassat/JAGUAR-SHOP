@@ -190,6 +190,9 @@
     color: #224F34 ;
 }
 .btn-search {
+    padding-inline: 15px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
     right: -4px !important;
     top: 50% !important;
     transform: translateY(-54%);
@@ -328,6 +331,14 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }
+.product-title-cart {
+  overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
 /* end product section */
 
 /* start product page section */
@@ -409,13 +420,14 @@
 /* filter */
 
 /* shoping cart */
+
 .card-img-cart-item {
-  min-height: 250px;
+  min-height: 200px;
   object-fit: cover;
-  width: 190px;
+  width: 150px;
 }
 .cart-info {
-  flex-shrink: 3;
+  flex-shrink: 50000;
 }
 .coupon-input:focus {
   box-shadow: none;
@@ -481,5 +493,58 @@
   padding: 0;
   margin: 0;
   border: none;
+}
+.category-overflow {
+  overflow: auto;
+  padding-bottom: 9px;
+}
 
+/* width */
+.category-overflow::-webkit-scrollbar {
+  width: 5px;
+  height: 6px;
+}
+
+/* Track */
+.category-overflow::-webkit-scrollbar-track {
+  background: #cee;
+  border-radius: 40px;
+}
+
+/* Handle */
+.category-overflow::-webkit-scrollbar-thumb {
+  background: #3a6c4e;
+  border-radius: 40px;
+}
+
+/* Handle on hover */
+.category-overflow::-webkit-scrollbar-thumb:hover {
+  background: #224F34;
+}
+body {
+  overflow-x: hidden;
+}
+.accordion-item:first-of-type .accordion-button {
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  margin-top: 12.65px;
+}
+.accordion-body{
+  box-shadow: none;
+  padding: 0;
+  border: none;
+}
+.accordion-item:last-of-type{
+  box-shadow: none;
+  border: none;
+}
+.accordion {
+  box-shadow: none;
+  border: none;
+  border-color: white !important;
+}
+.head-filter {
+  padding-top: 1px;
+  padding-bottom: 1px;
 }

@@ -56,7 +56,7 @@ const SignUpPage = () => {
         </p>
       </Alert> : ""}
       <h2 className='text-center text-black mb-3'>Hi There , Welcome</h2>
-      <h5 style={{width:"350px"}} className=' m-auto fw-mediem text-center mb-4 text-gray'>welcome please Enter Your Information to sing up</h5>
+      <h5 style={{width:"350px"}} className=' m-auto fw-mediem text-center mb-4 text-gray'>please Enter Your Information to sing up</h5>
       <FloatingLabel
         controlId="floatingInput"
         label="User Name"

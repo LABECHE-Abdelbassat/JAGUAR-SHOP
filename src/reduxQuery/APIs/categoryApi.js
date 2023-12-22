@@ -39,13 +39,13 @@ export const categoryApi = createApi({
             },
         ),
         updateCategory: builder.mutation({
-                query: (id,category,token) => ({
+                query: ({id,category}) => ({
                     url: `/categories/${id}`,
                     method: 'PUT',
                     body:category,
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -55,11 +55,11 @@ export const categoryApi = createApi({
             },
         ),
         deleteCategory: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/categories/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: (result, error, id) => {

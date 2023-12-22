@@ -10,6 +10,7 @@ import ErrorMessage from '../all/ErrorMessage';
 
 const AdminAddSubCategory = () => {
   const subCategoryName = useRef();
+  const catinput = useRef();
   const [categoryOf, setcategoryOf] = useState(null);
 
   const {data:categories} = useGetAllCategoriesQuery();
@@ -36,6 +37,13 @@ const AdminAddSubCategory = () => {
       setoptions(optionss)
     }, [categories])
 
+    useEffect(() => {
+      if(isSuccess){
+        subCategoryName.current.value="";
+        catinput.current.setValue([]);
+      }
+    }, [isSuccess])
+
     
   return (
     <div className='position-relative add-brand'>
@@ -48,6 +56,7 @@ const AdminAddSubCategory = () => {
     </Form.Group>
     <Select
         className='mt-3'
+        ref={catinput}
         onChange={hundleonChange}
         closeMenuOnSelect={true}
         options={options}

@@ -11,10 +11,10 @@ export const couponApi = createApi({
     endpoints: (builder) => ({
         //CRUD
         getAllCoupons: builder.query({
-            query: (token) => ({
+            query: () => ({
                 url :'/coupons',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
             providesTags: (result) =>
@@ -26,19 +26,19 @@ export const couponApi = createApi({
                     : [{type: 'Coupon', id: 'LIST'}],
         }),
         getCoupon: builder.query({
-            query: (id,token) => ({url : `/coupons/${id}`,
+            query: (id) => ({url : `/coupons/${id}`,
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         })
         }),
         createCoupon: builder.mutation({
-                query: (coupon,token) => ({
+                query: (coupon) => ({
                     url: '/coupons',
                     method: 'POST',
                     body:coupon,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -48,12 +48,12 @@ export const couponApi = createApi({
             },
         ),
         updateCoupon: builder.mutation({
-                query: (id,coupon,token) => ({
+                query: ({id,coupon}) => ({
                     url: `/coupons/${id}`,
                     method: 'PUT',
                     body:coupon,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -63,15 +63,15 @@ export const couponApi = createApi({
             },
         ),
         deleteCoupon: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/coupons/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: (result, error, id) => {
-                    return [{type: 'Coupon', id}]
+                    return [{type: 'Coupon', id:"LIST"}]
                 }
             },
         )

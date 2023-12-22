@@ -1,18 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactPaginate from "react-paginate";
 import { useDispatch } from 'react-redux';
 import { getAllProducts } from '../../redux/actions/productAction';
+import { useGetAllProductsQuery } from '../../reduxQuery/APIs/productApi';
 
-const PaginationComponent = ({paginationResult}) => {
-    const dispatch = useDispatch();
-    const handlePageClick = (event) => { 
-        console.log(event.selected);
-        dispatch(getAllProducts(`/api/v1/products?page=${event.selected + 1}`))
+const PaginationComponent = ({modifyPage,paginationResult}) => {
 
-
+    const handlePageClick = (event) => {
+        modifyPage(event.selected + 1)
     };
     return (
-        <ReactPaginate
+        <div>
+            {paginationResult?.numberOfPages>1 ? <ReactPaginate
             breakLabel="..."
             nextLabel=">"
             onPageChange={handlePageClick}
@@ -30,7 +29,9 @@ const PaginationComponent = ({paginationResult}) => {
             breakClassName={"page-item"}
             breakLinkClassName={"page-link"}
             activeClassName={"active"}
-        />
+        />:''}
+        </div>
+        
     )
 }
 

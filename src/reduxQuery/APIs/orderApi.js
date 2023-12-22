@@ -11,10 +11,10 @@ export const orderApi = createApi({
     endpoints: (builder) => ({
         //CRUD
         getAllOrders: builder.query({
-            query: (token) => ({
+            query: () => ({
                 url :'/orders',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
             providesTags: (result) =>
@@ -26,28 +26,28 @@ export const orderApi = createApi({
                     : [{type: 'Order', id: 'LIST'}],
         }),
         getOrder: builder.query({
-            query: (id,token) => ({
+            query: (id) => ({
                 url :`/orders/${id}`,
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             })
         }),
         checkoutSession: builder.query({
-            query: (id,token) => ({
+            query: (id) => ({
                 url :`/orders/checkout-session/${id}`,
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             })
         }),
         createCashOrder: builder.mutation({
-                query: (id,order,token) => ({
-                    url: `/orders/${id}`,
+                query: (args) => ({
+                    url: `/orders/${args.id}`,
                     method: 'POST',
-                    body:order,
+                    body:args.checkOutObj,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -57,11 +57,11 @@ export const orderApi = createApi({
             },
         ),
         updateOrdertoPaid: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/orders/${id}/pay`,
                     method: 'PUT',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -71,11 +71,11 @@ export const orderApi = createApi({
             },
         ),
         updateOrdertoDeliver: builder.mutation({
-                query: (id,token) => ({
+                query: (id) => ({
                     url: `/orders/${id}/deliver`,
                     method: 'PUT',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{

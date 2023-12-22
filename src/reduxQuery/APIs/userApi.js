@@ -11,10 +11,10 @@ export const userApi = createApi({
     endpoints: (builder) => ({
         //CRUD
         getAllUsers: builder.query({
-            query: (token) => ({
+            query: () => ({
                 url :'/users',
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
 
@@ -27,20 +27,20 @@ export const userApi = createApi({
                     : [{type: 'User', id: 'LIST'}],
         }),
         getUser: builder.query({
-            query: (id,token) => ({
+            query: (id) => ({
                 url :`/users/${id}`,
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
         }),
         createUser: builder.mutation({
-                query: (user,token) => ({
+                query: (user) => ({
                     url: '/users',
                     method: 'POST',
                     body:user,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -50,12 +50,12 @@ export const userApi = createApi({
             },
         ),
         updateUser: builder.mutation({
-                query: (id,user,token) => ({
+                query: ({id,user}) => ({
                     url: `/users/${id}`,
                     method: 'PUT',
                     body:user,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -65,12 +65,12 @@ export const userApi = createApi({
             },
         ),
         updateUserPassword: builder.mutation({
-                query: (id,pass,token) => ({
+                query: ({id,pass}) => ({
                     url: `/users/change-password/${id}`,
                     method: 'PUT',
                     body:pass,
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: [{
@@ -80,11 +80,11 @@ export const userApi = createApi({
             },
         ),
         deleteUser: builder.mutation({
-                query: (id,token) => ({
+                query: ({id}) => ({
                     url: `/users/${id}`,
                     method: 'DELETE',
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
                 invalidatesTags: (result, error, id) => {

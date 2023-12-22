@@ -1,67 +1,75 @@
-import React from 'react'
+import React, { useState } from 'react'
 import StartReview from '../all/StartReview'
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useAddProductToCartMutation } from '../../reduxQuery/APIs/cartApi';
+import SuccessMessage from '../all/SuccessMessage';
+import ErrorMessage from '../all/ErrorMessage';
+import { Spinner } from 'react-bootstrap';
+import { useGetAllSubCategoriesQuery } from '../../reduxQuery/APIs/subCategoryApi';
+import { useGetBrandQuery } from '../../reduxQuery/APIs/brandApi';
+
 
 const ProductInfo = ({product}) => {
-  const quantity = useRef();
-  const decreaseBtn=useRef();
-  const increaseBtn=useRef();
-  useEffect(() => {
-    decreaseBtn.current.disabled=true
-  }, [])
+  const [selectedColor, setselectedColor] = useState(null)
+  const [addToCart , {isLoading , isError , isSuccess , error}] = useAddProductToCartMutation();
+  const {data:subCat , isError : subIsError  , error : subError} = useGetAllSubCategoriesQuery();
+  const {data:brand ,isError : brandIsError  , error : brandError} = useGetBrandQuery(product?.brand);
+
   
-  function hundleClickAddCart() {
-    
-  }
-  function hundleClickDecrease() {
-    quantity.current.innerHTML = +quantity.current.innerText - 1 
-    increaseBtn.current.disabled = false
 
-    if(+quantity.current.innerText <=1){
-      decreaseBtn.current.disabled = true
+  
+  async function hundleClickAddCart() {
+    const cartObj = {
+      productId:product._id,
+      color:selectedColor
     }
-  }
-  function hundleClickIncrease() {
-    quantity.current.innerHTML = +quantity.current.innerText + 1 
-    decreaseBtn.current.disabled = false
-
-    if(+quantity.current.innerText >= product.quantity){
-      increaseBtn.current.disabled = true
-    }
+    await addToCart(cartObj)
   }
 
+
+  function hundleClickChange(selected){
+    setselectedColor(selected.target.value)
+  }
   return (
     <div>
+      <div style={{direction:"rtl"}}>
+            {isSuccess ? <SuccessMessage message={"Product Added Successfully To Your Cart"}/>:""}
+            {isError ? <ErrorMessage error={error}/> : ""}
+      </div>
+      <div style={{direction:"rtl"}}>
+            {subIsError ? <ErrorMessage error={subError}/> : ""}
+      </div>
+      <div style={{direction:"rtl"}}>
+            {brandIsError ? <ErrorMessage error={brandError}/> : ""}
+      </div>
       <div className='price-section gap-3 align-items-center d-flex'>
-        <div className="fw-semibold fs-5 ">{product.priceAfterDiscount | product.price} USD</div>
-        <div className="text-decoration-line-through">{product.price} USD</div>
-        <div className="badge bg-success">20%</div>
+        <div className="fw-semibold fs-5 ">{product?.priceAfterDiscount || product?.price}$</div>
+        <div className="text-decoration-line-through">{product?.price}$</div>
+        <div className="badge bg-success">{((product?.price - (product?.priceAfterDiscount || product?.price))/product?.price*100).toFixed(0)}%</div>
       </div>
       <h3 className='mt-2'>{product?.title}</h3>
       <div className="mt-2 d-flex align-items-center gap-3">
-        <div className='fs-5 mt-1-5'>4.5</div>
-        <StartReview readOnly={true} size={22} initialValue={1.7} />
+        {product?.ratingsAverage?.length >0 ? <div className='fs-5 mt-1-5'>{product?.ratingsAverage}</div>:""}
+        <StartReview readOnly={true} size={22} initialValue={product?.ratingsAverage} />
         <div className='line-h mt-1-5'></div>
-        <button className='reviews-btn mt-1-5'>50 reviews</button>
-
+        <button className='reviews-btn mt-1-5'>{product?.ratingsQuantity} reviews</button>
       </div>
       <div className="mt-3 text-gray">
-        lorem ipsum doler sit commit in git lorem ipsum doler sit commit in git lorem ipsum doler sit commit in git lorem ipsum doler sit commit in git lorem ipsum doler sit commit in git lorem ipsum doler 
+        {product?.description}
       </div>
       <div className="line w-100 my-3"></div>
       <div className="color">
-        <div className="fw-bold fs-4">Color: <span className="fw-semibold">Black</span></div>
+        <div className="fw-bold fs-4">Color: </div>
         <div class="gap-2 mt-3 d-flex" role="group" aria-label="Basic radio toggle button group">
-
-          <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" ></input>
-          <label class="yello color-item rounded-circle bg-warning" for="btnradio4"></label>
-
-          <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" ></input>
-          <label class="yello color-item rounded-circle bg-danger" for="btnradio5"></label>
-
-          <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off" ></input>
-          <label class="yello color-item rounded-circle bg-dark" for="btnradio6"></label>
+        {product?.colors.map((item , index)=>{
+          return (
+            <div key={index}><input onChange={hundleClickChange} type="radio" value={item} class="btn-check" name="btnradio" id={"btnradio"+index} autocomplete="off" ></input>
+              <label style={{backgroundColor:item}} class="yello color-item rounded-circle" for={"btnradio"+index}></label>
+            </div>
+          )
+        })}
+          
         </div>
         
       </div>
@@ -81,17 +89,18 @@ const ProductInfo = ({product}) => {
 
       </div> */}
       <div className="d-flex gap-3 mt-4">
-        <div className="w-50 d-flex gap-3  align-items-center justify-content-center bg-light">
-          <button ref={decreaseBtn} onClick={hundleClickDecrease} className='btn btn-outline-success rounded-circle btn-quantity'>-</button>
-          <div ref={quantity}>1</div>
-          <button ref={increaseBtn} onClick={hundleClickIncrease} className='btn btn-outline-success rounded-circle btn-quantity'>+</button>
-        </div>
-        <button onClick={hundleClickAddCart} className="btn w-100 py-2 fw-bold fs-5 btn-success text-white">ADD TO CART</button>
+        <button onClick={hundleClickAddCart} className="btn w-100 py-2 fw-bold fs-5 btn-success text-white">ADD TO CART
+        {isLoading ? <Spinner size='sm' className='ms-3'></Spinner> : ""}
+        </button>
       </div>
       <div className="line w-100 my-4"></div>
-      <div className="fs-5">Categories : <span className="">colothes</span></div>
-      <div className="fs-5">Sub Categories : <span className="">T-shits winter-clothes</span></div>
-      <div className="fs-5">Brands : <span className="">Adidas</span></div>
+      <div className="fs-5">Categories : <span className="">{product?.category?.name}</span></div>
+      <div className="fs-5">Sub Categories : <span className="">{subCat?.data?.filter((item , index)=>{
+        return product?.subcategories?.includes(item._id)
+      }).map((item , index)=>{
+        return <span>{item.name} . </span>
+      })}</span></div>
+      <div className="fs-5">Brands : <span className="">{brand?.data?.name}</span></div>
 
 
     </div>

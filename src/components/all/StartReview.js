@@ -31,7 +31,7 @@ export function StartReview({readOnly,initialValue,size,modifyRate}) {
         <div className='App'>
           <Rating
             allowFraction
-            initialValue={2.5}
+            initialValue={0}
             onClick={handleRating}
             
             /* Available Props */
