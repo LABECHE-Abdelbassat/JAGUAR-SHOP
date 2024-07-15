@@ -1,50 +1,47 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-
-
+import "swiper/css";
+import "swiper/css/navigation";
 
 // import required modules
-import { Navigation } from 'swiper/modules';
+import { Navigation } from "swiper/modules";
 
+const ProductImages = ({ imageCover, imgs }) => {
+  // const imgst = [...imgs];
+  // var lastElement = imgst.pop();
 
-const ProductImages = ({ imgs}) => {
-
-  const imgst = [...imgs]
-  var lastElement = imgst.pop();
-
-  imgst.unshift(lastElement);
-  console.log("rerender")
-
+  // imgst.unshift(lastElement);
 
   return (
-    <div className='image-swiper'>
+    <div className="image-swiper">
       <Swiper
         style={{
-          '--swiper-navigation-color': '#fff',
-          '--swiper-pagination-color': '#fff',
+          "--swiper-navigation-color": "#fff",
+          "--swiper-pagination-color": "#fff",
         }}
-        loop={true}
         spaceBetween={10}
         navigation={true}
-        modules={[ Navigation]}
+        modules={[Navigation]}
         className="mySwiper2"
       >
-        
-        {imgst?.map((item , index)=>{
-          return <SwiperSlide key={index}>
-          <img src={item} />
+        <SwiperSlide>
+          <img src={imageCover} />
         </SwiperSlide>
+        {imgs?.map((item, index) => {
+          if (item !== imageCover) {
+            return (
+              <SwiperSlide key={index}>
+                <img src={item} />
+              </SwiperSlide>
+            );
+          }
         })}
-        
-
       </Swiper>
     </div>
-  )
-}
+  );
+};
 
-export default ProductImages
+export default ProductImages;

@@ -84,7 +84,7 @@ export const reviewApi = baseApi.injectEndpoints({
                     },
                 }),
                 invalidatesTags: (result, error, id) => {
-                    return [{type: 'Review', id}]
+                    return [{type: 'Review', id},{type:"Review" , id:"LIST"},{type:'Product' , id : 'ITEM'}]
                 }
             },
         )

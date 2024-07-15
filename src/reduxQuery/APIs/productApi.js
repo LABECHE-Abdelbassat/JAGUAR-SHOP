@@ -7,7 +7,9 @@ export const productApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         //CRUD
         getAllProducts: builder.query({
-            query: (arg) => `/products${arg}`,
+            query: (arg) => {
+                return `/products${arg}`
+            },
             providesTags: (result) =>
                 result
                     ? [
@@ -48,6 +50,9 @@ export const productApi = baseApi.injectEndpoints({
                 invalidatesTags: [{
                     type: 'Product',
                     id: 'LIST'
+                },{
+                    type: 'Product',
+                    id: 'ITEM'
                 }]
             },
         ),

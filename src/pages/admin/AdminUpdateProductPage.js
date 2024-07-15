@@ -7,15 +7,9 @@ import AdminUpdateProduct from '../../components/admin/AdminUpdateProduct'
 const AdminUpdateProductPage = () => {
   return (
     <Container>
-        
-      <div className="row">
-        <div className="col-3">
-            <SideBarAdmin/>
-        </div>
-        <div className='col-9'>
+
             <AdminUpdateProduct/>
-        </div>
-      </div>
+
     </Container>
   )
 }

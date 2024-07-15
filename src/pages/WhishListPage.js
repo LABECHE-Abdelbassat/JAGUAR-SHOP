@@ -1,39 +1,65 @@
-import React, { useState } from 'react'
-import ProductLine from '../components/home/ProductLine'
-import { Container, Spinner } from 'react-bootstrap'
-import ProductItem from '../components/all/ProductItem'
-import { useGetAllProductsWishlistQuery } from '../reduxQuery/APIs/wishlistApi'
-import PaginationComponent from '../components/all/Pagination'
-import ErrorMessage from '../components/all/ErrorMessage'
+import React, { useEffect, useState } from "react";
+import ProductLine from "../components/home/ProductLine";
+import { Container, Spinner } from "react-bootstrap";
+import ProductItem from "../components/all/ProductItem";
+import { useGetAllProductsWishlistQuery } from "../reduxQuery/APIs/wishlistApi";
+import PaginationComponent from "../components/all/Pagination";
+import ErrorMessage from "../components/all/ErrorMessage";
+import NoItemMessage from "../components/all/NoItemMessage";
+import { ToastContainer, toast } from "react-toastify";
 
 const WhishListPage = () => {
-  const {data:wishlist ,isLoading , isError , error} = useGetAllProductsWishlistQuery();
+  const {
+    data: wishlist,
+    isLoading,
+    isError,
+    error,
+  } = useGetAllProductsWishlistQuery();
+  useEffect(() => {
+    if (isError) {
+      toast.error(
+        error?.status === 400
+          ? error?.data?.errors[0]?.msg
+          : error?.data?.message || "Network Error!",
+        { delay: 50, autoClose: 2000 }
+      );
+    }
+  }, [isError, error]);
+
   return (
-    <Container className='position-relative'>
-      <div style={{direction:"rtl"}}>
-            {isError ? <ErrorMessage error={error}/> : ""}
-        </div>
-        <div className='d-flex flex-column mb-4'>
-        <div className='text-main m-0 mb-3 p-0 fs-1'>WhishList</div>
-        <div className='flex-fill line mb-2'></div>
+    <Container className="position-relative">
+      <ToastContainer />
+      <div className="d-flex flex-column mb-4">
+        <div className="text-main m-0 mb-3 p-0 fs-1">WhishList</div>
+        <div className="flex-fill line mb-2"></div>
       </div>
-      {isLoading ? <div className='text-center'><Spinner size='lg' variant='success' className='mt-4 align-self-center'></Spinner></div>:
-            <div className='row'>
-            {
-              wishlist?.data?.map((item) => {
+      {wishlist?.data?.length < 1 ? (
+        <NoItemMessage />
+      ) : (
+        <>
+          {isLoading ? (
+            <div className="text-center">
+              <Spinner
+                size="lg"
+                variant="success"
+                className="mt-4 align-self-center"
+              ></Spinner>
+            </div>
+          ) : (
+            <div className="row">
+              {wishlist?.data?.map((item) => {
                 return (
-                  <div className='col-12 col-sm-6 col-md-4 col-lg-3 text-center mb-3 pb-4'>
-                    <ProductItem data={item}/>
+                  <div className="col-12 col-sm-6 col-md-4 col-lg-3 text-center mb-3 pb-4">
+                    <ProductItem data={item} />
                   </div>
-                )
-              })
-            }
-            
-    
-          </div>}
-
+                );
+              })}
+            </div>
+          )}
+        </>
+      )}
     </Container>
-  )
-}
+  );
+};
 
-export default WhishListPage
+export default WhishListPage;

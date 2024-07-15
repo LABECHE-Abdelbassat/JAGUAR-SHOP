@@ -25,33 +25,11 @@ export const addressApi = createApi({
                     ]
                     : [{type: 'Address', id: 'LIST'}],
         }),
-        getAddress: builder.query({
-            query: (id) => ({url : `/addresses/${id}`,
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-        })
-        }),
         addAddress: builder.mutation({
                 query: (address) => ({
                     url: '/addresses',
                     method: 'POST',
                     body:address,
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }),
-                invalidatesTags: [{
-                    type: 'Address',
-                    id: 'LIST'
-                }]
-            },
-        ),
-        updateAddress: builder.mutation({
-                query: (args) => ({
-                    url: `/addresses/${args.id}`,
-                    method: 'PUT',
-                    body:args.address,
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },

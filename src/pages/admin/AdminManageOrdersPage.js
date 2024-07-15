@@ -6,15 +6,7 @@ import SideBarAdmin from '../../components/admin/SideBarAdmin';
 const AdminManageOrdersPage = () => {
   return (
     <Container>
-        
-      <div className="row">
-        <div className="col-3">
-            <SideBarAdmin/>
-        </div>
-        <div className='col-9'>
             <AdminManageOrders/>
-        </div>
-      </div>
     </Container>
   )
 }

@@ -33,6 +33,7 @@ export const userApi = createApi({
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
             }),
+            providesTags:  [{type: 'User', id: 'LIST'}],
         }),
         createUser: builder.mutation({
                 query: (user) => ({
@@ -66,7 +67,7 @@ export const userApi = createApi({
         ),
         updateUserPassword: builder.mutation({
                 query: ({id,pass}) => ({
-                    url: `/users/change-password/${id}`,
+                    url: `/users/changePassword/${id}`,
                     method: 'PUT',
                     body:pass,
                     headers: {
@@ -80,7 +81,7 @@ export const userApi = createApi({
             },
         ),
         deleteUser: builder.mutation({
-                query: ({id}) => ({
+                query: (id) => ({
                     url: `/users/${id}`,
                     method: 'DELETE',
                     headers: {
@@ -88,7 +89,7 @@ export const userApi = createApi({
                     },
                 }),
                 invalidatesTags: (result, error, id) => {
-                    return [{type: 'User', id}]
+                    return [{type: 'User', id :'LIST'}]
                 }
             },
         )

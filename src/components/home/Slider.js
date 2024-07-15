@@ -1,17 +1,16 @@
-import React from 'react'
-import Container from 'react-bootstrap/esm/Container'
-import  { useRef, useState } from 'react';
+import React from "react";
+import Container from "react-bootstrap/esm/Container";
+import { useRef, useState } from "react";
 // Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import banner1 from "../../images/first_offer.jpg";
+import banner2 from "../../images/second_offer.jpg";
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-
-import { Autoplay, Pagination } from 'swiper/modules';
-
+import { Autoplay, Pagination } from "swiper/modules";
 
 const Slider = () => {
   return (
@@ -30,19 +29,14 @@ const Slider = () => {
         className="mySwiper main-slider"
       >
         <SwiperSlide>
-        <div className='slider w-100 d-flex align-items-center justify-content-center text-light text-center bg-success'>
-          SLIDER
-        </div>
+          <img src={banner1} alt="Banner" className="w-100 rounded-2 h-100" />
         </SwiperSlide>
         <SwiperSlide>
-        <div className='slider d-flex w-100 align-items-center justify-content-center text-light text-center bg-success'>
-          SLIDER 2
-        </div>
+          <img src={banner2} alt="Banner" className="w-100 rounded-2 h-100" />
         </SwiperSlide>
-       
       </Swiper>
     </Container>
-  )
-}
+  );
+};
 
-export default Slider
+export default Slider;

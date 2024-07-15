@@ -6,15 +6,9 @@ import AdminAddSubCategory from '../../components/admin/AdminAddSubCategory'
 const AdminAddSubCategoryPage = () => {
   return (
     <Container>
-        
-      <div className="row">
-        <div className="col-3">
-            <SideBarAdmin/>
-        </div>
-        <div className='col-9'>
+
             <AdminAddSubCategory/>
-        </div>
-      </div>
+
     </Container>
   )
 }

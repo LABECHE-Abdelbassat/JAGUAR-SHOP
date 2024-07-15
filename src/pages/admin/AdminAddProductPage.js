@@ -6,15 +6,7 @@ import AdminAddProduct from '../../components/admin/AdminAddProduct'
 const AdminAddProductPage = () => {
   return (
     <Container>
-        
-      <div className="row">
-        <div className="col-3">
-            <SideBarAdmin/>
-        </div>
-        <div className='col-9'>
-            <AdminAddProduct/>
-        </div>
-      </div>
+      <AdminAddProduct/>
     </Container>
   )
 }

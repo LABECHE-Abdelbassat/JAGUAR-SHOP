@@ -21,7 +21,10 @@ export const brandApi = createApi({
                     : [{type: 'Brand', id: 'LIST'}],
         }),
         getBrand: builder.query({
-            query: (id) => `/brands/${id}`
+            query: (id) => `/brands/${id}`,
+            providesTags:(result, error, id) => {
+                return [{type: 'Brand', id},{type:"Brand" , id: "LIST"}]
+            }
         }),
         createBrand: builder.mutation({
                 query: (brand) => ({
@@ -62,7 +65,7 @@ export const brandApi = createApi({
                     },
                 }),
                 invalidatesTags: (result, error, id) => {
-                    return [{type: 'Brand', id}]
+                    return [{type: 'Brand', id},{type:"Brand" , id: "LIST"}]
                 }
             },
         )

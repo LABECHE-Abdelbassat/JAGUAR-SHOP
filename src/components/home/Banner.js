@@ -1,15 +1,13 @@
-import React from 'react'
-import BrandItem from './BrandItem'
-import Container from 'react-bootstrap/esm/Container'
-
+import React from "react";
+import BrandItem from "./BrandItem";
+import Container from "react-bootstrap/esm/Container";
+import banner1 from "../../images/third_offer.jpg";
 const Banner = () => {
   return (
-    <Container>
-      <div className='slider d-flex align-items-center justify-content-center my-4 text-light text-center bg-success'>
-        Bannder
-      </div>
-    </Container>
-  )
-}
+    <div>
+      <img src={banner1} alt="Banner" className="w-100 rounded-2 h-100" />
+    </div>
+  );
+};
 
-export default Banner
+export default Banner;

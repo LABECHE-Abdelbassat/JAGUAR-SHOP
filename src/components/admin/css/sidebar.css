@@ -1,0 +1,214 @@
+/* :root {
+    --primary: #224F34;
+} */
+.logo-side img {
+  width: 140px;
+}
+
+.logo-side {
+  width: 140px;
+  padding: 20px 0;
+
+  margin: 0 auto;
+}
+@media (max-width: 1024px) {
+  .logo-side {
+    margin: 0 18px;
+  }
+}
+.sidebar-admin li {
+  list-style: none;
+  padding: 2px 5px;
+}
+.sidebar-admin li .side-title {
+  text-wrap: nowrap;
+}
+.sidebar-cont {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 1px 1px rgb(148, 148, 148);
+  position: relative;
+  width: fit-content;
+  top: 0;
+  padding: 0;
+  min-height: 100vh;
+  z-index: 50000;
+  padding-bottom: 150px;
+  transition: 0.2s;
+}
+.sidebar-admin {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  width: 400px;
+}
+
+.sidebar-admin ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.sidebar-admin li a {
+  display: flex;
+  gap: 10px;
+  /* box-shadow: 0 0 0px 1px rgb(228, 228, 228); */
+  padding: 15px 17px;
+  background-color: rgba(255, 255, 255, 0.199);
+  align-items: center;
+  transition: 0.3s;
+  border-radius: 10px;
+  border: solid 1px #eee;
+  color: var(--primary);
+  font-size: 18px;
+  position: relative;
+}
+.sidebar-admin li .logout {
+  display: flex;
+  gap: 10px;
+  /* box-shadow: 0 0 0px 1px rgb(228, 228, 228); */
+  padding: 15px 17px;
+  background-color: rgba(255, 255, 255, 0.199);
+  align-items: center;
+  transition: 0.3s;
+  border-radius: 10px;
+  border: solid 1px #eee;
+  color: var(--primary);
+  font-size: 18px;
+  position: relative;
+}
+.sidebar-admin li:last-child {
+}
+.sidebar-admin li.active a {
+  background-color: var(--primary);
+  margin: 0;
+  color: white;
+}
+.sidebar-admin li.active .logout {
+  background-color: var(--primary);
+  margin: 0;
+  color: white;
+}
+.sidebar-admin li.active a::before,
+.sidebar-admin li a:hover::before {
+  content: "";
+  position: absolute;
+  top: calc(100% - 1px);
+  width: 85%;
+  height: 0px;
+  background-color: #aaa;
+}
+.sidebar-admin li.active .logout::before,
+.sidebar-admin li .logout:hover::before {
+  content: "";
+  position: absolute;
+  top: calc(100% - 1px);
+  width: 85%;
+  height: 0px;
+  background-color: #aaa;
+}
+.sidebar-admin li.active .logout:hover {
+  background-color: var(--primary);
+}
+.sidebar-admin li .logout:hover {
+  background-color: rgba(30, 65, 43, 0.3);
+}
+.sidebar-admin li.active a:hover {
+  background-color: var(--primary);
+}
+.sidebar-admin li a:hover {
+  background-color: rgba(30, 65, 43, 0.3);
+}
+.sidebar-admin li .side-icon {
+  font-size: 24px;
+  transition: 0.3s;
+  color: var(--primary);
+}
+.sidebar-admin li.active .side-icon {
+  color: white;
+}
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .sidebar-cont {
+    position: fixed;
+    overflow: hidden;
+    height: 120ch;
+    z-index: 50000;
+    top: 0;
+    width: 390px;
+  }
+  .sidebar-cont.active {
+    position: sticky;
+    top: 50px;
+    overflow: hidden;
+    height: 100vh;
+    z-index: 50000;
+    width: 390px;
+  }
+  .sidebar-admin li .side-title {
+    display: block;
+  }
+}
+
+/* // Small devices (landscape phones, less than 768px) */
+@media (max-width: 768px) and (min-width: 575.98px) {
+  .sidebar-admin li .side-title {
+    display: none;
+  }
+
+  .sidebar-cont {
+    width: 65px;
+  }
+  .sidebar-admin {
+    width: 100%;
+  }
+  .sidebar-cont.active li .side-title {
+    display: block;
+  }
+  .sidebar-cont.active {
+    position: sticky;
+    top: 50px;
+    overflow: hidden;
+    height: 100vh;
+    z-index: 50000;
+  }
+  .sidebar-cont.active {
+    width: 390px;
+  }
+}
+
+/* // Medium devices (tablets, less than 992px) */
+@media (min-width: 768.1px) and (max-width: 1199px) {
+  .sidebar-admin li .side-title {
+    display: none;
+  }
+  .sidebar-cont {
+    width: 65px;
+  }
+  .sidebar-admin {
+    width: 100%;
+  }
+  .sidebar-cont.active li .side-title {
+    display: block;
+  }
+  .sidebar-cont.active {
+    position: absolute;
+    overflow: hidden;
+    height: 100vh;
+    z-index: 50000;
+  }
+  .sidebar-cont.active {
+    width: 390px;
+  }
+}
+
+/* // Large devices (desktops, less than 1200px) */
+@media (min-width: 1199.98px) {
+  .sidebar-cont {
+    width: 300px;
+  }
+  .sidebar-admin {
+    width: 300px;
+  }
+  .nav-burger {
+    display: none;
+  }
+}

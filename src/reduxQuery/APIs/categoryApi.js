@@ -21,7 +21,10 @@ export const categoryApi = createApi({
                     : [{type: 'Category', id: 'LIST'}],
         }),
         getCategory: builder.query({
-            query: (id) => `/categories/${id}`
+            query: (id) => `/categories/${id}`,
+            providesTags:(result, error, id) => {
+                return [{type: 'Category', id},{type:"Category" , id: "LIST"}]
+            }
         }),
         createCategory: builder.mutation({
                 query: (category) => ({
@@ -44,7 +47,6 @@ export const categoryApi = createApi({
                     method: 'PUT',
                     body:category,
                     headers: {
-                        'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },
                 }),
@@ -63,7 +65,7 @@ export const categoryApi = createApi({
                     },
                 }),
                 invalidatesTags: (result, error, id) => {
-                    return [{type: 'Category', id}]
+                    return [{type: 'Category', id},{type:'Category',id:"LIST"}]
                 }
             },
         )
