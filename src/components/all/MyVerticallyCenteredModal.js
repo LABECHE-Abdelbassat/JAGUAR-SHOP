@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Form, FormControl, Modal, Spinner } from "react-bootstrap";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import StartReview from "./StartReview";
 import { useRef } from "react";
 import { useState } from "react";
@@ -7,9 +7,7 @@ import {
   useCreateReviewOnProductMutation,
   useUpdateReviewMutation,
 } from "../../reduxQuery/APIs/reviewApi";
-import SuccessMessage from "./SuccessMessage";
-import ErrorMessage from "./ErrorMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 function MyVerticallyCenteredModal(props) {
   const review_text = useRef();
@@ -88,7 +86,6 @@ function MyVerticallyCenteredModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <ToastContainer />
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">Review</Modal.Title>
       </Modal.Header>
@@ -109,7 +106,7 @@ function MyVerticallyCenteredModal(props) {
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        {props.action == "create" ? (
+        {props.action === "create" ? (
           <Button variant="success" onClick={hundleClickAddReview}>
             Add Review
             {isLoading ? <Spinner size="sm" className="ms-3"></Spinner> : ""}

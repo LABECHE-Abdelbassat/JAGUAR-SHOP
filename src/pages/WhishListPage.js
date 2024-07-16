@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import ProductLine from "../components/home/ProductLine";
+import React, { useEffect } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import ProductItem from "../components/all/ProductItem";
 import { useGetAllProductsWishlistQuery } from "../reduxQuery/APIs/wishlistApi";
-import PaginationComponent from "../components/all/Pagination";
-import ErrorMessage from "../components/all/ErrorMessage";
 import NoItemMessage from "../components/all/NoItemMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const WhishListPage = () => {
   const {
@@ -28,7 +25,6 @@ const WhishListPage = () => {
 
   return (
     <Container className="position-relative">
-      <ToastContainer />
       <div className="d-flex flex-column mb-4">
         <div className="text-main m-0 mb-3 p-0 fs-1">WhishList</div>
         <div className="flex-fill line mb-2"></div>
@@ -47,9 +43,12 @@ const WhishListPage = () => {
             </div>
           ) : (
             <div className="row">
-              {wishlist?.data?.map((item) => {
+              {wishlist?.data?.map((item, index) => {
                 return (
-                  <div className="col-12 col-sm-6 col-md-4 col-lg-3 text-center mb-3 pb-4">
+                  <div
+                    key={index}
+                    className="col-12 col-sm-6 col-md-4 col-lg-3 text-center mb-3 pb-4"
+                  >
                     <ProductItem data={item} />
                   </div>
                 );

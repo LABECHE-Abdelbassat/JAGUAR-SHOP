@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
-import CategorieItem from "./CategorieItem";
 import Container from "react-bootstrap/esm/Container";
-
-import { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,12 +10,9 @@ import "swiper/css/navigation";
 // import required modules
 import { Navigation } from "swiper/modules";
 import BrandItem from "./BrandItem";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllBrands } from "./../../redux/actions/brandAction";
 import { useGetAllBrandsQuery } from "../../reduxQuery/APIs/brandApi";
 import { Spinner } from "react-bootstrap";
-import ErrorMessage from "../all/ErrorMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Brands = () => {
   const { data, isLoading, isError, error } = useGetAllBrandsQuery();
@@ -34,9 +28,7 @@ const Brands = () => {
     }
   }, [isError, error]);
   return (
-    <Container className="mt-4 position-relative">
-      <ToastContainer />
-
+    <Container className="mt-4 brands position-relative">
       <div>
         <div className="d-flex my-4 align-items-center">
           <div className="text-main m-0 p-0 fs-5">ALL Brands</div>
@@ -71,9 +63,9 @@ const Brands = () => {
             modules={[Navigation]}
             className="mySwiper mb-5"
           >
-            {data?.data.map((item) => {
+            {data?.data.map((item, index) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={index}>
                   <BrandItem data={item} />
                 </SwiperSlide>
               );

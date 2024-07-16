@@ -5,15 +5,12 @@ import { Icon } from "@iconify/react";
 import { Button, CloseButton } from "react-bootstrap";
 import MyVerticallyCenteredModal from "../all/MyVerticallyCenteredModal";
 import { useDeleteReviewMutation } from "../../reduxQuery/APIs/reviewApi";
-import SuccessMessage from "../all/SuccessMessage";
 import ErrorMessage from "../all/ErrorMessage";
 
 const RatingItem = ({ item, theCreator }) => {
   const [modalShow, setModalShow] = useState(false);
-  const [
-    deleteReview,
-    { isSuccess: deleteSuccess, isError: deleteIsError, error: deleteError },
-  ] = useDeleteReviewMutation();
+  const [deleteReview, { isError: deleteIsError, error: deleteError }] =
+    useDeleteReviewMutation();
 
   function hundleClickHide() {
     setModalShow(false);

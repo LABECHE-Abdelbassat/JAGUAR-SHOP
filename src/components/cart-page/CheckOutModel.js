@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Form,
-  FormControl,
-  FormGroup,
-  FormSelect,
-  Modal,
-  Spinner,
-} from "react-bootstrap";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import {
   useCheckoutSessionMutation,
-  useCheckoutSessionQuery,
   useCreateCashOrderMutation,
-  useLazyCheckoutSessionQuery,
 } from "../../reduxQuery/APIs/orderApi";
 import { Link, useNavigate } from "react-router-dom";
 import ErrorMessage from "../all/ErrorMessage";
 import { useGetAllUserAddressesQuery } from "../../reduxQuery/APIs/addressApi";
-import { addressApi } from "./../../reduxQuery/APIs/addressApi";
 
 function CheckOutModel(props) {
   const navigation = useNavigate();
@@ -209,6 +198,11 @@ function CheckOutModel(props) {
         >
           Check Out
           {cashOrderLoading ? (
+            <Spinner size="sm" className="ms-3"></Spinner>
+          ) : (
+            ""
+          )}
+          {checkoutSessionLoading ? (
             <Spinner size="sm" className="ms-3"></Spinner>
           ) : (
             ""

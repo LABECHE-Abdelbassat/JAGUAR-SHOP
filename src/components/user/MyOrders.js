@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import OrdersProductItem from "./OrdersProductItem";
 import OrderItem from "./OrderItem";
 import { useGetAllOrdersQuery } from "../../reduxQuery/APIs/orderApi";
-import ErrorMessage from "../all/ErrorMessage";
 import { Spinner } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const MyOrders = () => {
   const { data, isError, error, isLoading } = useGetAllOrdersQuery();
@@ -21,7 +19,6 @@ const MyOrders = () => {
   }, [isError, error]);
   return (
     <div className="postion-relative">
-      <ToastContainer />
       {isLoading ? (
         <div className="text-center">
           <Spinner

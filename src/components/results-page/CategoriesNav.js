@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import React from "react";
 import { useGetAllCategoriesQuery } from "../../reduxQuery/APIs/categoryApi";
 
 const CategoriesNav = ({ modifyCat, cattext }) => {

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useRef } from "react";
 import {
-  Alert,
   Button,
   Col,
   Container,
@@ -10,11 +9,9 @@ import {
   Row,
   Spinner,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { signUp } from "../redux/actions/authAction";
 import { useSignUpMutation } from "../reduxQuery/APIs/authApi";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import signUpImage from "../images/sign_up.png";
 
 const SignUpPage = () => {
@@ -59,7 +56,7 @@ const SignUpPage = () => {
         }
       }
     }
-  }, [data, isSuccess]);
+  }, [data, isSuccess, navigation]);
 
   useEffect(() => {
     if (isError) {
@@ -78,7 +75,6 @@ const SignUpPage = () => {
   }, [isError, error]);
   return (
     <Container className="d-flex mt-3 position-relative flex-column gap-2">
-      <ToastContainer />
       <h3 className="text-center text-black ">Hi There , Welcome</h3>
 
       <h6 className="   text-center mb-4 text-gray">

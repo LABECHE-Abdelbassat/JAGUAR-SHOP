@@ -4,19 +4,14 @@ import ProductInfo from "../components/product-page/ProductInfo";
 import Container from "react-bootstrap/esm/Container";
 import RatingSection from "../components/product-page/RatingSection";
 import ProductLine from "../components/home/ProductLine";
-import { getSpecificProduct } from "../redux/actions/productAction";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import ProductDetailedHook from "./../hooks/productDetailedHook";
 import {
   useGetAllProductsQuery,
   useGetProductQuery,
 } from "../reduxQuery/APIs/productApi";
-import SuccessMessage from "../components/all/SuccessMessage";
-import ErrorMessage from "../components/all/ErrorMessage";
 import { Spinner } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const params = useParams();
@@ -62,7 +57,6 @@ const ProductPage = () => {
 
   return (
     <Container className="position-relative">
-      <ToastContainer />
       {isLoading ? (
         <div className="text-center">
           <Spinner

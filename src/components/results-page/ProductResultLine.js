@@ -14,7 +14,7 @@ const ProductResultLine = ({ modifyOrder, modifyPage, data, isFetching }) => {
     if (locationdata?.length > 0) {
       modifyOrder(`&sort=-ratingsAverage`);
     }
-  }, [locationdata]);
+  }, [locationdata, modifyOrder]);
 
   function hundleChangeOrderOption(e) {
     let order = "";
@@ -102,7 +102,7 @@ const ProductResultLine = ({ modifyOrder, modifyPage, data, isFetching }) => {
               <div className="row mt-4">
                 {data?.data?.map((item) => {
                   if (item?.quantity === 0 || !item?.quantity) {
-                    return;
+                    return "";
                   }
                   return (
                     <div className="col-12 col-sm-6 col-md-6 col-lg-4 text-center mb-3 pb-4">
@@ -113,14 +113,10 @@ const ProductResultLine = ({ modifyOrder, modifyPage, data, isFetching }) => {
               </div>
             </>
           )}
-          {isFetching ? (
-            ""
-          ) : (
-            <PaginationComponent
-              modifyPage={modifyPage}
-              paginationResult={data?.paginationResult}
-            />
-          )}
+          <PaginationComponent
+            modifyPage={modifyPage}
+            paginationResult={data?.paginationResult}
+          />
         </>
       )}
     </div>

@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Button, Card, CloseButton, Spinner } from "react-bootstrap";
-import StartReview from "./StartReview";
-import { Icon } from "@iconify/react";
+import { Card, CloseButton, Spinner } from "react-bootstrap";
 import { useGetProductQuery } from "../../reduxQuery/APIs/productApi";
 import ErrorMessage from "./ErrorMessage";
 import {

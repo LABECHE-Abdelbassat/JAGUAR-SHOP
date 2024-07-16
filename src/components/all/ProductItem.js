@@ -1,39 +1,26 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import Card from "react-bootstrap/Card";
 import StartReview from "./StartReview";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   useAddProductToWishlistMutation,
   useDeleteProductFromWishlistMutation,
   useGetAllProductsWishlistQuery,
 } from "../../reduxQuery/APIs/wishlistApi";
 import { useAddProductToCartMutation } from "../../reduxQuery/APIs/cartApi";
-import { Button, Modal, Offcanvas, Spinner } from "react-bootstrap";
+import { Modal, Offcanvas, Spinner } from "react-bootstrap";
 import ProductModel from "../product-page/ProductModel";
-import CartPage from "../../pages/CartPage";
 import CartCanvas from "../cart-page/CartCanvas";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ErrorMessage from "./ErrorMessage";
 
 const ProductItem = ({ data }) => {
-  const {
-    data: wishlist,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetAllProductsWishlistQuery();
-  const [activeId, setactiveId] = useState("");
-  const [
-    addToWishlist,
-    { isSuccess: addSuccess, isError: addIsError, error: addError },
-  ] = useAddProductToWishlistMutation();
-  const [
-    removeFromWishlist,
-    { isSuccess: deleteSuccess, isError: removeIserror, error: removeError },
-  ] = useDeleteProductFromWishlistMutation();
+  const { data: wishlist } = useGetAllProductsWishlistQuery();
+  const [addToWishlist, { isError: addIsError, error: addError }] =
+    useAddProductToWishlistMutation();
+  const [removeFromWishlist, { isError: removeIserror, error: removeError }] =
+    useDeleteProductFromWishlistMutation();
 
   const [
     addToCart,
@@ -54,7 +41,6 @@ const ProductItem = ({ data }) => {
   }
 
   async function handleWishlistClick(isClick) {
-    setactiveId(data?.id);
     if (!isClick) {
       const obj = { productId: data._id };
       await addToWishlist(obj);
@@ -66,7 +52,6 @@ const ProductItem = ({ data }) => {
   const [lgShow, setLgShow] = useState(false);
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
@@ -76,25 +61,32 @@ const ProductItem = ({ data }) => {
     }
     if (cartIsError) {
       toast.error(
-        error?.status === 400
-          ? error?.data?.errors[0]?.msg
-          : error?.data?.message || "Error Adding product to cart",
+        cartError?.status === 400
+          ? cartError?.data?.errors[0]?.msg
+          : cartError?.data?.message || "Error Adding product to cart",
         { delay: 50, autoClose: 2000 }
       );
     }
   }, [cartIsSuccess, cartIsError, cartError]);
 
   useEffect(() => {
-    // if (deleteSuccess) {
-    //   toast.success("Product removed from wishlist successfully!");
-    // }
     if (removeIserror) {
       toast.error(
         removeError?.data?.message || "Error removing product from wishlist",
         { delay: 50, autoClose: 2000 }
       );
     }
-  }, [removeError]);
+  }, [removeError, removeIserror]);
+  useEffect(() => {
+    if (addError) {
+      toast.error(
+        addError?.status === 400
+          ? addError?.data?.errors[0]?.msg
+          : addError?.data?.message || "Network Error!",
+        { delay: 50, autoClose: 2000 }
+      );
+    }
+  }, [addError, addIsError]);
 
   function OffCanvasExample({ show, setShow }) {
     const handleClose = () => setShow(false);
@@ -117,16 +109,6 @@ const ProductItem = ({ data }) => {
 
   return (
     <div className="product-item">
-      <div className="w-100 posiiton-relative">
-        <div style={{ direction: "rtl" }}>
-          {addIsError ? <ErrorMessage error={addError} /> : ""}
-        </div>
-        <div style={{ direction: "rtl" }}>
-          {removeIserror ? <ErrorMessage error={removeError} /> : ""}
-        </div>
-      </div>
-
-      <ToastContainer />
       <div
         className="p-relative"
         style={{ position: "relative", overflow: "hidden" }}

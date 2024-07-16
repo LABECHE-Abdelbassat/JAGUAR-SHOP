@@ -1,37 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Slider from "../components/home/Slider";
 import ProductLine from "../components/home/ProductLine";
 import Banner from "../components/home/Banner";
 import Brands from "../components/home/Brands";
-import Footer from "../components/all/Footer";
-import TheNav from "../components/all/TheNav";
-import StartReview from "../components/all/StartReview";
 import Container from "react-bootstrap/esm/Container";
 import CategoriesModel from "../components/home/Categories";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllProducts,
-  getTopProducts,
-} from "./../redux/actions/productAction";
 import { useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useGetAllProductsQuery } from "../reduxQuery/APIs/productApi";
-import { useGetAllBrandsQuery } from "../reduxQuery/APIs/brandApi";
-import { useGetAllCategoriesQuery } from "../reduxQuery/APIs/categoryApi";
-import {
-  useGetAllSubCategoriesOnCategoryQuery,
-  useGetAllSubCategoriesQuery,
-} from "../reduxQuery/APIs/subCategoryApi";
-import { useGetAllProductsWishlistQuery } from "../reduxQuery/APIs/wishlistApi";
-import {
-  useGetAllReviewsOnProductQuery,
-  useGetAllReviewsQuery,
-} from "../reduxQuery/APIs/reviewApi";
-import ErrorMessage from "../components/all/ErrorMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Home = () => {
-  const scrollref = useRef();
   const [page, setpage] = useState(1);
   const { data, isLoading, isError, error } = useGetAllProductsQuery(
     `?page=${page}`
@@ -55,7 +34,6 @@ const Home = () => {
 
   return (
     <Container className="text-center position-relative">
-      <ToastContainer />
       <Slider />
       <CategoriesModel />
       {topLoading ? (

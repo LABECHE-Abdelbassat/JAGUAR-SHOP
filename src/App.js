@@ -4,36 +4,22 @@ import AdminAddProductPage from "./pages/admin/AdminAddProductPage";
 
 import Home from "./pages/Home";
 import "./css/global.css";
-import TheNav from "./components/all/TheNav";
 import ProductPage from "./pages/ProductPage";
 import ResultsPage from "./pages/ResultsPage";
 import CartPage from "./pages/CartPage";
-import SideBarUser from "./components/all/SideBarUser";
-import { Container } from "react-bootstrap";
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  unstable_HistoryRouter,
-  useLocation,
-} from "react-router-dom";
-import ManageProfile from "./pages/ManageProfile";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WhishListPage from "./pages/WhishListPage";
-import Footer from "./components/all/Footer";
 import ProfilePage from "./pages/user/ProfilePage";
 import MyOrdersPage from "./pages/user/MyOrdersPage";
 import AdminCouponPage from "./pages/admin/AdminCouponPage";
 import AdminManageOrdersPage from "./pages/admin/AdminManageOrdersPage";
 import AdminOrderPage from "./pages/admin/AdminOrderPage";
-import ManageAdresses from "./components/user/ManageAdresses";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import AdminAddSubCategoryPage from "./pages/admin/AdminAddSubCategoryPage";
 import AdminProductPage from "./pages/admin/AdminProductsPage";
 import ManageAdressesPage from "./pages/user/ManageAdressesPage";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "./redux/actions/productAction";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AdminUpdateProductPage from "./pages/admin/AdminUpdateProductPage";
 import { AdminPage } from "./pages/admin/AdminPage";
 import RootPage from "./pages/RootPage";
@@ -45,6 +31,7 @@ import AdminUpdateBrandPage from "./pages/admin/AdminUpdateBrandPage";
 import AdminUpdateSubcategoryPage from "./pages/admin/AdminUpdateSubcategoryPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [adminsearch, setadminSearch] = useState("");
@@ -54,6 +41,7 @@ function App() {
   // TODO : bottom navigation . toastify
   return (
     <div>
+      <ToastContainer />
       <div className="app-style">
         <BrowserRouter>
           <Routes>

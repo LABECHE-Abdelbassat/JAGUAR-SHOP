@@ -6,17 +6,10 @@ import {
   FloatingLabel,
   Form,
   Spinner,
-  Toast,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "../redux/actions/authAction";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useLogInMutation } from "../reduxQuery/APIs/authApi";
-import { useState } from "react";
-import Alert from "react-bootstrap/Alert";
-import ErrorMessage from "../components/all/ErrorMessage";
-import SuccessMessage from "../components/all/SuccessMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const navigation = useNavigate();
@@ -81,8 +74,6 @@ const LoginPage = () => {
 
   return (
     <Container className="d-flex position-relative flex-column gap-2">
-      <ToastContainer />
-
       <h3 className="text-center text-black mb-3">Welcome Back</h3>
       <h6 className="text-center mb-4 text-gray">
         please login to your account

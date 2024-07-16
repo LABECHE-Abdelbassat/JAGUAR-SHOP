@@ -10,7 +10,7 @@ const PaginationComponent = ({ modifyPage, paginationResult }) => {
     window.location.href = "#scroll";
   };
   return (
-    <div>
+    <div className="paginnoneselect">
       {paginationResult?.numberOfPages > 1 ? (
         <ReactPaginate
           breakLabel="..."

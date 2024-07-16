@@ -4,14 +4,8 @@ import { Container, Spinner } from "react-bootstrap";
 import Filter from "../components/results-page/Filter";
 import ProductResultLine from "../components/results-page/ProductResultLine";
 import { useGetAllProductsQuery } from "../reduxQuery/APIs/productApi";
-import {
-  useLoaderData,
-  useLocation,
-  useNavigation,
-  useParams,
-} from "react-router-dom";
-import ErrorMessage from "../components/all/ErrorMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ResultsPage = () => {
   const searchWord = useParams().keyword;
@@ -31,7 +25,7 @@ const ResultsPage = () => {
     } else {
       setcat("");
     }
-  }, [searchWord]);
+  }, [searchWord, categoryWord]);
   useEffect(() => {
     setparams(`?page=${page}`);
   }, [page]);
@@ -51,7 +45,7 @@ const ResultsPage = () => {
   function modifyCat(cat) {
     setcat(cat);
   }
-  const { data, isLoading, isFetching, isSuccess, isError, error } =
+  const { data, isLoading, isFetching, isError, error } =
     useGetAllProductsQuery(`${params}${order}${keyword}${cat}${filter}`);
 
   useEffect(() => {
@@ -66,7 +60,6 @@ const ResultsPage = () => {
   }, [isError, error]);
   return (
     <Container style={{ overflow: "hidden" }} className="position-relative">
-      <ToastContainer />
       <CategoriesNav modifyCat={modifyCat} cattext={categoryWord} />
       <div className="row mt-2">
         <div className="col-0 col-md-3 col-lg-2">
@@ -78,6 +71,8 @@ const ResultsPage = () => {
           </div>
         ) : (
           <div className="col-12 col-md-9 col-lg-10">
+            <div id="scroll"></div>
+
             <ProductResultLine
               modifyOrder={modifyOrder}
               isFetching={isFetching}

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import CategorieItem from "./CategorieItem";
 import Container from "react-bootstrap/esm/Container";
 
-import { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -12,12 +11,9 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Autoplay, Pagination } from "swiper/modules";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "./../../redux/actions/categoryAction";
-import { Button, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { useGetAllCategoriesQuery } from "../../reduxQuery/APIs/categoryApi";
-import ErrorMessage from "../all/ErrorMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Categories = () => {
   const { data, isLoading, isError, error } = useGetAllCategoriesQuery();
@@ -33,7 +29,6 @@ const Categories = () => {
   }, [isError, error]);
   return (
     <Container className="my-4 pb-2">
-      <ToastContainer />
       {isLoading ? (
         <Spinner size="lg" variant="success" className="mt-4"></Spinner>
       ) : data?.data?.length < 1 ? (
@@ -69,9 +64,9 @@ const Categories = () => {
           modules={[Autoplay, Pagination]}
           className="mySwiper swiper-wrapper-cat"
         >
-          {data?.data.map((item) => {
+          {data?.data.map((item, index) => {
             return (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <CategorieItem data={item} />
               </SwiperSlide>
             );

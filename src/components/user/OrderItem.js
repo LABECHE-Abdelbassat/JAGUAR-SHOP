@@ -1,7 +1,5 @@
 import React from "react";
 import OrdersProductItem from "./OrdersProductItem";
-import { Row } from "react-bootstrap";
-import galery from "../../images/galery.jpg";
 const OrderItem = ({ data, size, index }) => {
   return (
     <div className="border border-1 mb-3 rounded-3 p-3">

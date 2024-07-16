@@ -1,19 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Card, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import {
   useDeleteLoggedUserMutation,
   useGetLoggedUserQuery,
   useUpdateLoggedUserMutation,
   useUpdateLoggedUserPasswordMutation,
 } from "../../reduxQuery/APIs/loggedUserApi";
-import SuccessMessage from "../all/SuccessMessage";
-import ErrorMessage from "../all/ErrorMessage";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const navigation = useNavigate();
@@ -27,9 +24,7 @@ const Profile = () => {
   const user_email_input = useRef();
   const user_phone_input = useRef();
 
-  const { data, isLoading, isError, isSuccess, error } =
-    useGetLoggedUserQuery();
-  console.log(data);
+  const { data, isError, error } = useGetLoggedUserQuery();
   const [
     updatePassword,
     {
@@ -112,16 +107,17 @@ const Profile = () => {
         },
       });
     }
-  }, [passSuccess]);
+  }, [passSuccess, navigation]);
   useEffect(() => {
     if (deleteSuccess) {
       localStorage.removeItem("token");
+      localStorage.removeItem("role");
       navigation("/login", {
         replace: true,
         state: { message: "Log Out Success" },
       });
     }
-  }, [deleteSuccess]);
+  }, [deleteSuccess, navigation]);
 
   useEffect(() => {
     if (deleteIsError) {
@@ -177,8 +173,6 @@ const Profile = () => {
 
   return (
     <div>
-      <ToastContainer />
-
       <h2 className="color-main fw-semibold">Profile</h2>
       <Form>
         <Form.Group className="mt-3" as={Col}>

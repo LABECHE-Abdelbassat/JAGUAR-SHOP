@@ -1,22 +1,13 @@
 import React from "react";
 import StartReview from "../all/StartReview";
 import RatingItem from "./RatingItem";
-import Modal from "react-bootstrap/Modal";
-import { Button, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import MyVerticallyCenteredModal from "../all/MyVerticallyCenteredModal";
 import { useState } from "react";
-import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllReviews } from "../../redux/actions/reviewAction";
-import {
-  useGetAllReviewsOnProductQuery,
-  useGetAllReviewsQuery,
-} from "../../reduxQuery/APIs/reviewApi";
-import SuccessMessage from "../all/SuccessMessage";
-import ErrorMessage from "../all/ErrorMessage";
+import { useGetAllReviewsOnProductQuery } from "../../reduxQuery/APIs/reviewApi";
 import { useGetLoggedUserQuery } from "../../reduxQuery/APIs/loggedUserApi";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const RatingSection = ({ product }) => {
   const { data, isLoading, error, isError } = useGetAllReviewsOnProductQuery(
@@ -43,22 +34,10 @@ const RatingSection = ({ product }) => {
         );
       }
     }
-  }, [isError, error]);
-  useEffect(() => {
-    if (loggdUserIsError) {
-      toast.error(
-        loggedError?.status === 400
-          ? loggedError?.data?.errors[0]?.msg
-          : loggedError?.data?.message || "Network Error!",
-        { delay: 50, autoClose: 2000 }
-      );
-    }
-  }, [loggdUserIsError, loggedError]);
+  }, [isError, error, product]);
 
   return (
     <div className="position-relative">
-      <ToastContainer />
-
       <div className="d-flex mt-4 pt-2 align-items-center">
         <div className="flex-fill line me-3"></div>
         <div className="text-main m-0 p-0 fs-4 fw-bold">PRODUCT REVIEWS</div>
@@ -101,10 +80,11 @@ const RatingSection = ({ product }) => {
         </div>
       ) : (
         <div>
-          {data?.data?.map((item) => {
-            if (loggedUser?.data._id == item.user._id) {
-              return <RatingItem item={item} theCreator={true} />;
-            } else return <RatingItem item={item} theCreator={false} />;
+          {data?.data?.map((item, index) => {
+            if (loggedUser?.data._id === item.user._id) {
+              return <RatingItem item={item} key={index} theCreator={true} />;
+            } else
+              return <RatingItem item={item} key={index} theCreator={false} />;
           })}
         </div>
       )}

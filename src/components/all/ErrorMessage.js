@@ -18,8 +18,6 @@ const ErrorMessage = ({ error }) => {
 
   if (!show) return null;
 
-  const variant = "";
-
   return (
     <Alert
       style={{
@@ -30,13 +28,12 @@ const ErrorMessage = ({ error }) => {
         maxWidth: "calc(100% - 24px)",
       }}
       className="position-fixed"
-      variant={error.status == 400 ? "warning" : "danger"}
+      variant={error.status === 400 ? "warning" : "danger"}
       onClose={() => setShow(false)}
       dismissible
     >
-      <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
       <p>
-        {error?.status == 400
+        {error?.status === 400
           ? error?.data?.errors[0]?.msg
           : error?.data?.message}
       </p>

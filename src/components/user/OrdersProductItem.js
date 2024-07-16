@@ -1,6 +1,5 @@
-import { Icon } from "@iconify/react";
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const OrdersProductItem = ({ data }) => {
   return (

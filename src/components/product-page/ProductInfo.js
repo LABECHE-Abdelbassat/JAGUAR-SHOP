@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import StartReview from "../all/StartReview";
-import { useRef } from "react";
 import { useEffect } from "react";
 import { useAddProductToCartMutation } from "../../reduxQuery/APIs/cartApi";
-import SuccessMessage from "../all/SuccessMessage";
-import ErrorMessage from "../all/ErrorMessage";
 import { Offcanvas, Spinner } from "react-bootstrap";
-import { useGetAllSubCategoriesQuery } from "../../reduxQuery/APIs/subCategoryApi";
 import CartCanvas from "../cart-page/CartCanvas";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ProductInfo = ({ product }) => {
   const [selectedColor, setselectedColor] = useState(null);
@@ -35,7 +31,6 @@ const ProductInfo = ({ product }) => {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   function OffCanvasExample({ show, setShow }) {
@@ -72,7 +67,6 @@ const ProductInfo = ({ product }) => {
   return (
     <div>
       <OffCanvasExample setShow={setShow} show={show} />
-      <ToastContainer></ToastContainer>
 
       {!product?.sold ? (
         <div className="price-section gap-3 align-items-center d-flex">
@@ -117,7 +111,7 @@ const ProductInfo = ({ product }) => {
         <div className="color">
           <div className="fw-bold fs-4">Colors : </div>
           <div
-            class="gap-2 mt-3 d-flex"
+            className="gap-2 mt-3 d-flex"
             role="group"
             aria-label="Basic radio toggle button group"
           >
@@ -128,15 +122,15 @@ const ProductInfo = ({ product }) => {
                     onChange={hundleClickChange}
                     type="radio"
                     value={item}
-                    class="btn-check"
+                    className="btn-check"
                     name="btnradio"
                     id={"btnradio" + index}
-                    autocomplete="off"
+                    autoComplete="off"
                   ></input>
                   <label
                     style={{ backgroundColor: item }}
-                    class="yello color-item rounded-circle"
-                    for={"btnradio" + index}
+                    className="yello color-item rounded-circle"
+                    htmlFor={"btnradio" + index}
                   ></label>
                 </div>
               );
@@ -144,21 +138,6 @@ const ProductInfo = ({ product }) => {
           </div>
         </div>
       )}
-      {/* <div className="size mt-3">
-        <div className="fw-bold fs-4">Size : <span className="fw-semibold">XS</span></div>
-        <div class="gap-2 mt-3 d-flex" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="btnradio2" id="btnradio1" autocomplete="off" ></input>
-          <label class="btn btn-outline-success" for="btnradio1">S</label>
-
-          <input type="radio" class="btn-check" name="btnradio2" id="btnradio2" autocomplete="off" ></input>
-          <label class="btn btn-outline-success" for="btnradio2">M</label>
-
-          <input type="radio" class="btn-check" name="btnradio2" id="btnradio3" autocomplete="off"></input>
-          <label class="btn btn-outline-success" for="btnradio3">L</label>
-        </div>
-        
-
-      </div> */}
       <div className="d-flex gap-3 mt-4">
         <button
           onClick={hundleClickAddCart}
@@ -176,7 +155,7 @@ const ProductInfo = ({ product }) => {
         Sub Categories :{" "}
         <span className="">
           {product?.subcategories?.map((item, index) => {
-            return <span>{item.name} . </span>;
+            return <span key={index}>{item.name} . </span>;
           })}
         </span>
       </div>

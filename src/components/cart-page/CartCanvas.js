@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { Container, Spinner } from "react-bootstrap";
-import ProductItemDetailed from "../../components/all/ProductItemDetailed";
 import { useGetUserCartQuery } from "../../reduxQuery/APIs/cartApi";
-import ErrorMessage from "../../components/all/ErrorMessage";
 import ProductItemSmall from "../all/ProductItemSmall";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const CartCanvas = () => {
   const { data, isLoading, isError, isSuccess, error } = useGetUserCartQuery();
@@ -22,8 +20,6 @@ const CartCanvas = () => {
   }, [isError, error]);
   return (
     <Container className="position-relative">
-      <ToastContainer />
-
       <div className="row">
         {isLoading ? (
           <div className="text-center">

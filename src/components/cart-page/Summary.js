@@ -6,13 +6,10 @@ import {
   useApplyCouponToCartMutation,
   useClearUserCartMutation,
 } from "../../reduxQuery/APIs/cartApi";
-import ErrorMessage from "../all/ErrorMessage";
 import { useNavigate } from "react-router-dom";
-import { Alert, Spinner, Toast } from "react-bootstrap";
-import SuccessMessage from "../all/SuccessMessage";
-import MyVerticallyCenteredModal from "../all/MyVerticallyCenteredModal";
+import { Alert, Spinner } from "react-bootstrap";
 import CheckOutModel from "./CheckOutModel";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const Summary = ({ data }) => {
   const coupon_input = useRef();
@@ -36,7 +33,7 @@ const Summary = ({ data }) => {
     if (isSuccess) {
       navigation("/", { replace: true });
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigation]);
   function hundleClickHide() {
     setModalShow(false);
   }
@@ -57,10 +54,28 @@ const Summary = ({ data }) => {
       );
     }
   }, [isError, error]);
+  useEffect(() => {
+    if (couponIsError) {
+      toast.error(
+        couponError?.status === 400
+          ? couponError?.data?.errors[0]?.msg
+          : couponError?.data?.message || "Network Error!",
+        { delay: 50, autoClose: 2000 }
+      );
+    }
+  }, [couponError, couponIsError]);
+
+  useEffect(() => {
+    if (couponIsSuccess) {
+      toast.success("Coupon Applied Successfylly!", {
+        delay: 50,
+        autoClose: 2000,
+      });
+    }
+  }, [couponIsSuccess]);
 
   return (
     <div className="summary border-gray border p-3 rounded-3 mt-3">
-      <ToastContainer />
       <h6 className="mb-3">Summary</h6>
       <InputGroup className="my-2">
         <Form.Control
@@ -79,15 +94,6 @@ const Summary = ({ data }) => {
           {couponLoading ? <Spinner size="sm" className="ms-2"></Spinner> : ""}
         </Button>
       </InputGroup>
-      {couponIsError ? (
-        <Alert variant={"danger"} dismissible>
-          {couponError?.status === 400
-            ? couponError?.data?.errors[0]?.msg
-            : couponError?.data?.message || "Network Error!"}
-        </Alert>
-      ) : (
-        ""
-      )}
       <div className="d-flex text-gray mt-2  justify-content-between">
         <div>Subtotal {data?.cartItems?.length} item</div>
         <div>{data?.totalCartPrice || 0}$</div>
@@ -127,6 +133,9 @@ const Summary = ({ data }) => {
         CLEAR CART
         {isLoading ? <Spinner size="sm" className="ms-3"></Spinner> : ""}
       </Button>
+      <Alert variant={"success"} className="m-0 mt-2 text-center">
+        <div>Test Coupon : TECHNO-KAI</div>
+      </Alert>
     </div>
   );
 };

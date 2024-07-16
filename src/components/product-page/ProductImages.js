@@ -1,20 +1,12 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
-// import required modules
 import { Navigation } from "swiper/modules";
 
 const ProductImages = ({ imageCover, imgs }) => {
-  // const imgst = [...imgs];
-  // var lastElement = imgst.pop();
-
-  // imgst.unshift(lastElement);
-
   return (
     <div className="image-swiper">
       <Swiper
@@ -28,15 +20,17 @@ const ProductImages = ({ imageCover, imgs }) => {
         className="mySwiper2"
       >
         <SwiperSlide>
-          <img src={imageCover} />
+          <img src={imageCover} alt="Product Img" />
         </SwiperSlide>
         {imgs?.map((item, index) => {
           if (item !== imageCover) {
             return (
               <SwiperSlide key={index}>
-                <img src={item} />
+                <img src={item} alt="Product Img" />
               </SwiperSlide>
             );
+          } else {
+            return "";
           }
         })}
       </Swiper>

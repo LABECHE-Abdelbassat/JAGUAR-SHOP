@@ -5,9 +5,7 @@ import {
   useDeleteAddressMutation,
   useGetAllUserAddressesQuery,
 } from "../../reduxQuery/APIs/addressApi";
-import ErrorMessage from "../all/ErrorMessage";
-import SuccessMessage from "../all/SuccessMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ManageAdresses = () => {
   const [addAddress, { isLoading, isError, isSuccess, error }] =
@@ -103,8 +101,6 @@ const ManageAdresses = () => {
 
   return (
     <div className="position-relative">
-      <ToastContainer />
-
       <h2 className="color-main fw-semibold">Add New Address</h2>
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

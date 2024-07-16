@@ -1,14 +1,13 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
-import SideBarAdmin from '../../components/admin/SideBarAdmin'
-import AdminAddProduct from '../../components/admin/AdminAddProduct'
+import React from "react";
+import { Container } from "react-bootstrap";
+import AdminAddProduct from "../../components/admin/AdminAddProduct";
 
 const AdminAddProductPage = () => {
   return (
     <Container>
-      <AdminAddProduct/>
+      <AdminAddProduct />
     </Container>
-  )
-}
+  );
+};
 
-export default AdminAddProductPage
+export default AdminAddProductPage;

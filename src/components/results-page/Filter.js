@@ -18,7 +18,6 @@ const Filter = ({ modifyFilter }) => {
   const max_input = useRef();
   const min_input = useRef();
   const reset_input = useRef();
-  // const {data:subCategories}=useGetAllSubCategoriesOnCategoryQuery(categoryId);
   const { data: brands } = useGetAllBrandsQuery();
 
   async function hundleClickApplyFilter() {
@@ -82,6 +81,7 @@ const Filter = ({ modifyFilter }) => {
                       defaultChecked={item._id === brand}
                       value={`${item?._id}`}
                       name="brand"
+                      key={index}
                       onChange={hundleChangeBrands}
                       id={`brand-radio-${index}`}
                       label={`${item.name}`}
@@ -96,21 +96,6 @@ const Filter = ({ modifyFilter }) => {
                 />
               </form>
             </div>
-            {/* <div class="gap-2 mt-2" role="group" aria-label="Basic checkbox toggle button group">
-      <div className='flex-fill line'></div>
-      <Form.Check // prettier-ignore
-            type={'checkbox'}
-            id={`default-checkbox`}
-            label={`default checkbox`}
-            className='mt-2'
-          />
-          <Form.Check // prettier-ignore
-            type={'checkbox'}
-            id={`default-checkbox`}
-            label={`default checkbox`}
-            
-          />
-    </div> */}
             <div
               class="gap-2 mt-2"
               role="group"

@@ -3,12 +3,11 @@ import { Container, Spinner } from "react-bootstrap";
 import ProductItemDetailed from "../components/all/ProductItemDetailed";
 import Summary from "../components/cart-page/Summary";
 import { useGetUserCartQuery } from "../reduxQuery/APIs/cartApi";
-import ErrorMessage from "../components/all/ErrorMessage";
 import EmptyCartMessage from "./../components/all/EmptyCartMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
-  const { data, isLoading, isError, isSuccess, error } = useGetUserCartQuery();
+  const { data, isLoading, isError, error } = useGetUserCartQuery();
   useEffect(() => {
     if (!error?.data?.message?.startsWith("There is no cart for this user")) {
       if (isError) {
@@ -24,7 +23,6 @@ const CartPage = () => {
 
   return (
     <Container className="position-relative">
-      <ToastContainer />
       <div className="d-flex my-0 align-items-center">
         <div className="text-main m-0 p-0 fw-semibold fs-4">SHOPING CART</div>
         <div className="flex-fill line mx-3"></div>

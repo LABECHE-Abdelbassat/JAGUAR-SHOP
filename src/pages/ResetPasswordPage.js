@@ -6,24 +6,13 @@ import {
   FloatingLabel,
   Form,
   Spinner,
-  Toast,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "../redux/actions/authAction";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  useLogInMutation,
-  useResetPasswordMutation,
-} from "../reduxQuery/APIs/authApi";
-import { useState } from "react";
-import Alert from "react-bootstrap/Alert";
-import ErrorMessage from "../components/all/ErrorMessage";
-import SuccessMessage from "../components/all/SuccessMessage";
-import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../reduxQuery/APIs/authApi";
+import { toast } from "react-toastify";
 
 const ResetPasswordPage = () => {
   const navigation = useNavigate();
-  const location = useLocation();
 
   const [resetPassword, { data, isError, isLoading, isSuccess, error }] =
     useResetPasswordMutation();
@@ -41,11 +30,11 @@ const ResetPasswordPage = () => {
     }
   }
   useEffect(() => {
-    localStorage.setItem("token", data?.token);
     if (isSuccess) {
+      localStorage.setItem("token", data?.token);
       navigation("/login", { replace: true });
     }
-  }, [data]);
+  }, [data, isSuccess, navigation]);
 
   useEffect(() => {
     if (isError) {
@@ -59,7 +48,6 @@ const ResetPasswordPage = () => {
   }, [isError, error]);
   return (
     <Container className="d-flex position-relative flex-column gap-2">
-      <ToastContainer />
       <h2 className="text-center text-black mb-3">You Are A liar!</h2>
       <h5
         style={{ width: "400px" }}

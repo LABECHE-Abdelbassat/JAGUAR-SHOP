@@ -769,3 +769,10 @@ footer img {
     z-index: 1001;
   }
 }
+
+.brands {
+  user-select: none;
+}
+.paginnoneselect {
+  user-select: none;
+}

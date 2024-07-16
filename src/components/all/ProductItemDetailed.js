@@ -1,15 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { Button, Card, CloseButton, Spinner } from "react-bootstrap";
-import StartReview from "./StartReview";
-import { Icon } from "@iconify/react";
+import { Card, CloseButton, Spinner } from "react-bootstrap";
 import { useGetProductQuery } from "../../reduxQuery/APIs/productApi";
-import ErrorMessage from "./ErrorMessage";
 import {
   useRemoveSpecificCartItemMutation,
   useUpdateCartProductQuantityMutation,
 } from "../../reduxQuery/APIs/cartApi";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ProductItemDetailed = ({ item }) => {
   const decreaseBtn = useRef();
@@ -94,7 +91,6 @@ const ProductItemDetailed = ({ item }) => {
 
   return (
     <div className="cart-flow">
-      <ToastContainer />
       {isLoading ? (
         <div className="text-center">
           <Spinner
